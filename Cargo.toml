@@ -1,0 +1,17 @@
+[package]
+name = "fun-html"
+version = "0.0.0"
+authors = ["Jonathan Cornaz"]
+edition = "2021"
+rust-version = "1.82"
+repository = "https://github.com/jcornaz/fun-html"
+description = "HTML as a rust function!"
+publish = false
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[dependencies]
+
+[dev-dependencies]

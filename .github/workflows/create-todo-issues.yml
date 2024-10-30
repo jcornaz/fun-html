@@ -1,0 +1,26 @@
+name: "Create Issues from TODO comments"
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      COMMIT_REF:
+        description: The SHA of the commit to get the diff for
+        required: true
+      BASE_COMMIT:
+        description: By default, the commit entered above is compared to the one directly before it; to go back further, enter an earlier SHA here
+        required: false
+
+jobs:
+  todo-to-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: alstr/todo-to-issue-action@master
+        env:
+          MANUAL_COMMIT_REF: ${{ inputs.COMMIT_REF }}
+          MANUAL_BASE_REF: ${{ inputs.BASE_COMMIT }}
