@@ -15,3 +15,4 @@ rustdoc-args = ["--cfg", "docsrs"]
 [dependencies]
 
 [dev-dependencies]
+rstest = { version = "0.23.0", default-features = false }
