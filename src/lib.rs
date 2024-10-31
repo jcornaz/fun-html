@@ -3,7 +3,7 @@
 pub mod attributes;
 pub mod nodes;
 
-use std::fmt::Display;
+use std::{borrow::Cow, fmt::Display};
 
 #[derive(Debug)]
 pub struct Document(Node);
@@ -18,7 +18,18 @@ enum NodeInner {
         attributes: Vec<Attribute>,
         children: Vec<Node>,
     },
-    Text(String),
+    Text(Cow<'static, str>),
+}
+
+#[derive(Debug)]
+pub struct Attribute {
+    key: &'static str,
+    value: AttributeValue,
+}
+
+#[derive(Debug)]
+enum AttributeValue {
+    String(Cow<'static, str>),
 }
 
 impl Default for Document {
@@ -68,8 +79,7 @@ impl Display for Node {
                 write!(f, "<{tag}")?;
                 for attribute in attributes {
                     match &attribute.value {
-                        Some(value) => write!(f, " {}=\"{}\"", attribute.key, value)?,
-                        None => todo!(),
+                        AttributeValue::String(s) => write!(f, " {}=\"{s}\"", attribute.key)?,
                     }
                 }
                 write!(f, ">")?;
@@ -84,17 +94,11 @@ impl Display for Node {
     }
 }
 
-#[derive(Debug)]
-pub struct Attribute {
-    key: &'static str,
-    value: Option<String>,
-}
-
 impl Attribute {
-    pub fn new(key: &'static str, value: impl Into<String>) -> Self {
+    pub fn new(key: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
         Self {
             key,
-            value: Some(value.into()),
+            value: AttributeValue::String(value.into()),
         }
     }
 }

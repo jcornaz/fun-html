@@ -1,3 +1,5 @@
+use std::borrow::Cow;
+
 use crate::{Attribute, Node, NodeInner};
 
 pub fn h1(
@@ -7,6 +9,6 @@ pub fn h1(
     Node::new("h1", attributes, children)
 }
 
-pub fn text(value: impl Into<String>) -> Node {
+pub fn text(value: impl Into<Cow<'static, str>>) -> Node {
     NodeInner::Text(value.into()).into()
 }
