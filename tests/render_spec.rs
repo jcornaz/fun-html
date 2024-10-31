@@ -31,3 +31,13 @@ fn should_render_attributes() {
 fn should_render_node(#[case] def: Node, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }
+
+#[test]
+fn text_should_be_escaped() {
+    let input = "<script>alert('hello');</script>";
+    let string = text(input).to_string();
+    assert_eq!(
+        string,
+        "&lt;script&gt;alert(&#x27;hello&#x27;);&lt;&#x2F;script&gt;"
+    );
+}

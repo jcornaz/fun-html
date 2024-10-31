@@ -94,7 +94,7 @@ impl Display for Node {
                 }
                 write!(f, "</{tag}>")?;
             }
-            NodeInner::Text(text) => write!(f, "{text}")?,
+            NodeInner::Text(text) => write!(f, "{}", html_escape::encode_safe(text))?,
         }
         Ok(())
     }
