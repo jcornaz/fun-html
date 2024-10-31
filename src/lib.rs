@@ -5,13 +5,13 @@ pub mod nodes;
 
 use std::{borrow::Cow, fmt::Display};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Document(Node);
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Node(NodeInner);
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 enum NodeInner {
     Node {
         tag: &'static str,
@@ -21,13 +21,13 @@ enum NodeInner {
     Text(Cow<'static, str>),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Attribute {
     key: &'static str,
     value: AttributeValue,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 enum AttributeValue {
     String(Cow<'static, str>),
 }
