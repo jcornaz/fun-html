@@ -27,7 +27,7 @@ fn should_render_html_document() {
 #[test]
 fn should_render_attributes() {
     let node = h1(
-        [class(["underlined", "blue"]), attr("foo", "bar")],
+        [class(["underlined", "blue"]), ("foo", "bar").into()],
         [text("Hello world!")],
     );
     assert_eq!(
@@ -41,10 +41,12 @@ fn should_render_attributes() {
 #[case(text("hello".to_string()), "hello")]
 #[case("hello".into(), "hello")]
 #[case("hello".to_string().into(), "hello")]
-#[case(div([attr("foo", "bar")], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
-#[case(div([attr("foo", "bar".to_string())], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
+#[case(raw("<my-component></my-component>"), "<my-component></my-component>")]
+#[case(raw_unsafe("<my-component></my-component>".to_string()), "<my-component></my-component>")]
+#[case(div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
+#[case(div([("foo", "bar".to_string()).into()], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]
-#[case(title([attr("foo", "bar")], [text("hello")]), "<title foo=\"bar\">hello</title>")]
+#[case(title([("foo", "bar").into()], [text("hello")]), "<title foo=\"bar\">hello</title>")]
 #[case(body([id("foo")], [text("hello")]), "<body id=\"foo\">hello</body>")]
 #[case(h1([id("foo")], [text("hello")]), "<h1 id=\"foo\">hello</h1>")]
 #[case(h2([id("foo")], [text("hello")]), "<h2 id=\"foo\">hello</h2>")]
@@ -66,7 +68,7 @@ fn text_should_be_escaped() {
 #[rstest]
 fn attribute_should_be_escaped() {
     let string = div(
-        [attr("foo", "<script>\"\" { open: !close }")],
+        [("foo", "<script>\"\" { open: !close }").into()],
         [text("hello")],
     )
     .to_string();

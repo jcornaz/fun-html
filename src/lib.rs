@@ -25,6 +25,7 @@ enum NodeInner {
         children: Vec<Node>,
     },
     Text(Cow<'static, str>),
+    Raw(Cow<'static, str>),
 }
 
 #[derive(Debug, Clone)]
@@ -100,6 +101,7 @@ impl Display for Node {
                 write!(f, "</{tag}>")?;
             }
             NodeInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
+            NodeInner::Raw(raw) => write!(f, "{raw}")?,
         }
         Ok(())
     }
