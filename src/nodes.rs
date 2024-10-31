@@ -1,4 +1,4 @@
-use crate::{Attribute, Node};
+use crate::{Attribute, Node, NodeInner};
 
 pub fn h1(
     attributes: impl IntoIterator<Item = Attribute>,
@@ -8,5 +8,5 @@ pub fn h1(
 }
 
 pub fn text(value: impl Into<String>) -> Node {
-    Node::Text(value.into())
+    NodeInner::Text(value.into()).into()
 }

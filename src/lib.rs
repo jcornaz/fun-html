@@ -8,6 +8,19 @@ use std::fmt::Display;
 #[derive(Debug)]
 pub struct Document(Node);
 
+#[derive(Debug)]
+pub struct Node(NodeInner);
+
+#[derive(Debug)]
+enum NodeInner {
+    Node {
+        tag: &'static str,
+        attributes: Vec<Attribute>,
+        children: Vec<Node>,
+    },
+    Text(String),
+}
+
 impl Default for Document {
     fn default() -> Self {
         Self(Node::new(
@@ -24,34 +37,30 @@ impl Display for Document {
     }
 }
 
-#[derive(Debug)]
-pub enum Node {
-    Node {
-        tag: &'static str,
-        attributes: Vec<Attribute>,
-        children: Vec<Node>,
-    },
-    Text(String),
-}
-
 impl Node {
     pub fn new(
         tag: &'static str,
         attributes: impl IntoIterator<Item = Attribute>,
         children: impl IntoIterator<Item = Node>,
     ) -> Self {
-        Self::Node {
+        Self(NodeInner::Node {
             tag,
             attributes: attributes.into_iter().map(Into::into).collect(),
             children: children.into_iter().collect(),
-        }
+        })
+    }
+}
+
+impl From<NodeInner> for Node {
+    fn from(value: NodeInner) -> Self {
+        Self(value)
     }
 }
 
 impl Display for Node {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Node::Node {
+        match &self.0 {
+            NodeInner::Node {
                 tag,
                 attributes,
                 children,
@@ -69,7 +78,7 @@ impl Display for Node {
                 }
                 write!(f, "</{tag}>")?;
             }
-            Node::Text(text) => write!(f, "{text}")?,
+            NodeInner::Text(text) => write!(f, "{text}")?,
         }
         Ok(())
     }
