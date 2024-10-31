@@ -5,6 +5,7 @@ pub mod nodes;
 
 pub mod prelude {
     pub use crate::attributes::*;
+    pub use crate::html;
     pub use crate::nodes::*;
     pub use crate::{Attribute, Document, Node};
 }
