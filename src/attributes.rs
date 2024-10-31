@@ -6,6 +6,10 @@ pub fn attr(key: &'static str, value: impl Into<Cow<'static, str>>) -> Attribute
     Attribute::new(key, value)
 }
 
+pub fn lang(lang: impl Into<Cow<'static, str>>) -> Attribute {
+    attr("lang", lang)
+}
+
 pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
     attr("id", id)
 }

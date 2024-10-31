@@ -10,7 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Escape HTML strings
 * `id` and `class` attributes
 * Nodes
-  * Html document (`head` and `body`)
+  * Html document (`html`, `head`, `body`)
+  * Meta (`title`)
   * Text (`h1`, `h2`, `h3`, `h4`, `h5`, `h6` and `text`)
   * Container (`div`)
 * `Node`, `Attribute` and `Document` types

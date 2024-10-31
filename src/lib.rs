@@ -113,3 +113,10 @@ impl Attribute {
         }
     }
 }
+
+pub fn html(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Node>,
+) -> Document {
+    Document(Node::new("html", attributes, children))
+}

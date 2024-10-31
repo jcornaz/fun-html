@@ -1,6 +1,6 @@
 use rstest::rstest;
 
-use fun_html::prelude::*;
+use fun_html::{html, prelude::*};
 
 #[test]
 fn should_render_empty_document() {
@@ -10,6 +10,18 @@ fn should_render_empty_document() {
         string,
         "<!DOCTYPE html>\n<html><head></head><body></body></html>"
     )
+}
+
+#[test]
+fn should_render_html_document() {
+    let doc = html(
+        [lang("en")],
+        [
+            head([], [title([], [text("greeting")])]),
+            body([], [h1([], [text("Hello world!")])]),
+        ],
+    );
+    assert_eq!(doc.to_string(), "<!DOCTYPE html>\n<html lang=\"en\"><head><title>greeting</title></head><body><h1>Hello world!</h1></body></html>");
 }
 
 #[test]
@@ -28,6 +40,7 @@ fn should_render_attributes() {
 #[case(div([attr("foo", "bar")], [text("hello")]), "<div foo=\"bar\">hello</div>")]
 #[case(div([attr("foo", "bar".to_string())], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]
+#[case(title([attr("foo", "bar")], [text("hello")]), "<title foo=\"bar\">hello</title>")]
 #[case(body([id("foo")], [text("hello")]), "<body id=\"foo\">hello</body>")]
 #[case(h1([id("foo")], [text("hello")]), "<h1 id=\"foo\">hello</h1>")]
 #[case(h2([id("foo")], [text("hello")]), "<h2 id=\"foo\">hello</h2>")]

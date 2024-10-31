@@ -16,6 +16,13 @@ pub fn head(
     Node::new("head", attributes, children)
 }
 
+pub fn title(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Node>,
+) -> Node {
+    Node::new("title", attributes, children)
+}
+
 pub fn body(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Node>,
