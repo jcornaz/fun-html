@@ -37,7 +37,11 @@ fn should_render_attributes() {
 }
 
 #[rstest]
-#[case(div([attr("foo", "bar")], [text("hello")]), "<div foo=\"bar\">hello</div>")]
+#[case(text("hello"), "hello")]
+#[case(text("hello".to_string()), "hello")]
+#[case("hello".into(), "hello")]
+#[case("hello".to_string().into(), "hello")]
+#[case(div([attr("foo", "bar")], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
 #[case(div([attr("foo", "bar".to_string())], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]
 #[case(title([attr("foo", "bar")], [text("hello")]), "<title foo=\"bar\">hello</title>")]

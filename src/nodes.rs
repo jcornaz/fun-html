@@ -75,3 +75,9 @@ pub fn h6(
 pub fn text(value: impl Into<Cow<'static, str>>) -> Node {
     NodeInner::Text(value.into()).into()
 }
+
+impl<T: Into<Cow<'static, str>>> From<T> for Node {
+    fn from(value: T) -> Self {
+        text(value)
+    }
+}

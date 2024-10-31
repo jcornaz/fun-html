@@ -2,6 +2,12 @@ use std::borrow::Cow;
 
 use crate::Attribute;
 
+impl<T: Into<Cow<'static, str>>> From<(&'static str, T)> for Attribute {
+    fn from((key, value): (&'static str, T)) -> Self {
+        Attribute::new(key, value)
+    }
+}
+
 pub fn attr(key: &'static str, value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new(key, value)
 }
