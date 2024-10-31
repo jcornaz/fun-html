@@ -41,6 +41,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(text("hello".to_string()), "hello")]
 #[case("hello".into(), "hello")]
 #[case("hello".to_string().into(), "hello")]
+#[case([div([], ["a".into()]), div([], ["b".into()])].into(), "<div>a</div><div>b</div>")]
 #[case(raw("<my-component></my-component>"), "<my-component></my-component>")]
 #[case(raw_unsafe("<my-component></my-component>".to_string()), "<my-component></my-component>")]
 #[case(div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]

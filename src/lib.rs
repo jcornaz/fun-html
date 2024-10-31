@@ -27,6 +27,7 @@ enum NodeInner {
     },
     Text(Cow<'static, str>),
     Raw(Cow<'static, str>),
+    Multiple(Vec<Node>),
 }
 
 #[derive(Debug, Clone)]
@@ -107,6 +108,11 @@ impl Display for Node {
             }
             NodeInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
             NodeInner::Raw(raw) => write!(f, "{raw}")?,
+            NodeInner::Multiple(nodes) => {
+                for node in nodes {
+                    write!(f, "{node}")?;
+                }
+            }
         }
         Ok(())
     }

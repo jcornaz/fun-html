@@ -96,8 +96,26 @@ pub fn raw_unsafe(html: String) -> Node {
     NodeInner::Raw(html.into()).into()
 }
 
-impl<T: Into<Cow<'static, str>>> From<T> for Node {
-    fn from(value: T) -> Self {
+impl From<&'static str> for Node {
+    fn from(value: &'static str) -> Self {
         text(value)
+    }
+}
+
+impl From<String> for Node {
+    fn from(value: String) -> Self {
+        text(value)
+    }
+}
+
+impl<const N: usize> From<[Node; N]> for Node {
+    fn from(value: [Node; N]) -> Self {
+        Vec::from(value).into()
+    }
+}
+
+impl From<Vec<Node>> for Node {
+    fn from(value: Vec<Node>) -> Self {
+        Self(NodeInner::Multiple(value))
     }
 }
