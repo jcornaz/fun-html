@@ -85,7 +85,12 @@ impl Display for Node {
                 write!(f, "<{tag}")?;
                 for attribute in attributes {
                     match &attribute.value {
-                        AttributeValue::String(s) => write!(f, " {}=\"{s}\"", attribute.key)?,
+                        AttributeValue::String(s) => write!(
+                            f,
+                            " {}=\"{}\"",
+                            attribute.key,
+                            html_escape::encode_double_quoted_attribute(s)
+                        )?,
                     }
                 }
                 write!(f, ">")?;
@@ -94,7 +99,7 @@ impl Display for Node {
                 }
                 write!(f, "</{tag}>")?;
             }
-            NodeInner::Text(text) => write!(f, "{}", html_escape::encode_safe(text))?,
+            NodeInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
         }
         Ok(())
     }

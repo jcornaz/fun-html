@@ -14,12 +14,19 @@ fn should_render_empty_document() {
 
 #[test]
 fn should_render_attributes() {
-    let node = h1([class(["underlined", "blue"])], [text("Hello world!")]);
-    let string = format!("{node}");
-    assert_eq!(string, "<h1 class=\"underlined blue\">Hello world!</h1>")
+    let node = h1(
+        [class(["underlined", "blue"]), attr("foo", "bar")],
+        [text("Hello world!")],
+    );
+    assert_eq!(
+        node.to_string(),
+        "<h1 class=\"underlined blue\" foo=\"bar\">Hello world!</h1>"
+    )
 }
 
 #[rstest]
+#[case(div([attr("foo", "bar")], [text("hello")]), "<div foo=\"bar\">hello</div>")]
+#[case(div([attr("foo", "bar".to_string())], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]
 #[case(body([id("foo")], [text("hello")]), "<body id=\"foo\">hello</body>")]
 #[case(h1([id("foo")], [text("hello")]), "<h1 id=\"foo\">hello</h1>")]
@@ -36,8 +43,18 @@ fn should_render_node(#[case] def: Node, #[case] expected: &str) {
 fn text_should_be_escaped() {
     let input = "<script>alert('hello');</script>";
     let string = text(input).to_string();
+    assert_eq!(string, "&lt;script&gt;alert('hello');&lt;/script&gt;");
+}
+
+#[rstest]
+fn attribute_should_be_escaped() {
+    let string = div(
+        [attr("foo", "<script>\"\" { open: !close }")],
+        [text("hello")],
+    )
+    .to_string();
     assert_eq!(
         string,
-        "&lt;script&gt;alert(&#x27;hello&#x27;);&lt;&#x2F;script&gt;"
+        "<div foo=\"&lt;script&gt;&quot;&quot; { open: !close }\">hello</div>"
     );
 }

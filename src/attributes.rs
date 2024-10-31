@@ -2,8 +2,12 @@ use std::borrow::Cow;
 
 use crate::Attribute;
 
+pub fn attr(key: &'static str, value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new(key, value)
+}
+
 pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("id", id)
+    attr("id", id)
 }
 
 pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {

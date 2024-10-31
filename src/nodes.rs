@@ -2,6 +2,13 @@ use std::borrow::Cow;
 
 use crate::{Attribute, Node, NodeInner};
 
+pub fn div(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Node>,
+) -> Node {
+    Node::new("div", attributes, children)
+}
+
 pub fn head(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Node>,
