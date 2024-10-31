@@ -1,4 +1,10 @@
+use std::borrow::Cow;
+
 use crate::Attribute;
+
+pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("id", id)
+}
 
 pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {
     let mut values = String::new();

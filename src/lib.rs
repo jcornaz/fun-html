@@ -3,6 +3,12 @@
 pub mod attributes;
 pub mod nodes;
 
+pub mod prelude {
+    pub use crate::attributes::*;
+    pub use crate::nodes::*;
+    pub use crate::{Attribute, Document, Node};
+}
+
 use std::{borrow::Cow, fmt::Display};
 
 #[derive(Debug, Clone)]
