@@ -31,7 +31,7 @@ enum NodeInner {
 
 #[derive(Debug, Clone)]
 pub struct Attribute {
-    key: &'static str,
+    name: &'static str,
     value: AttributeValue,
 }
 
@@ -62,6 +62,10 @@ impl Node {
         attributes: impl IntoIterator<Item = Attribute>,
         children: impl IntoIterator<Item = Node>,
     ) -> Self {
+        debug_assert!(
+            !tag.is_empty() && tag.chars().all(|c| !c.is_whitespace()),
+            "invalid attribute name: '{tag}'"
+        );
         Self(NodeInner::Node {
             tag,
             attributes: attributes.into_iter().map(Into::into).collect(),
@@ -90,7 +94,7 @@ impl Display for Node {
                         AttributeValue::String(s) => write!(
                             f,
                             " {}=\"{}\"",
-                            attribute.key,
+                            attribute.name,
                             html_escape::encode_double_quoted_attribute(s)
                         )?,
                     }
@@ -109,9 +113,13 @@ impl Display for Node {
 }
 
 impl Attribute {
-    pub fn new(key: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
+    pub fn new(name: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
+        debug_assert!(
+            !name.is_empty() && name.chars().all(|c| !c.is_whitespace()),
+            "invalid attribute name: '{name}'"
+        );
         Self {
-            key,
+            name,
             value: AttributeValue::String(value.into()),
         }
     }

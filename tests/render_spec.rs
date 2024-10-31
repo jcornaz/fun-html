@@ -24,16 +24,16 @@ fn should_render_html_document() {
     assert_eq!(doc.to_string(), "<!DOCTYPE html>\n<html lang=\"en\"><head><title>greeting</title></head><body><h1>Hello world!</h1></body></html>");
 }
 
-#[test]
-fn should_render_attributes() {
-    let node = h1(
-        [class(["underlined", "blue"]), ("foo", "bar").into()],
-        [text("Hello world!")],
-    );
-    assert_eq!(
-        node.to_string(),
-        "<h1 class=\"underlined blue\" foo=\"bar\">Hello world!</h1>"
-    )
+#[rstest]
+#[case(("foo", "bar").into(), "foo=\"bar\"")]
+#[case(("x-on:keyup.enter", "doSomething").into(), "x-on:keyup.enter=\"doSomething\"")]
+#[case(("@keyup.enter", "doSomething").into(), "@keyup.enter=\"doSomething\"")]
+#[case(id("foo"), "id=\"foo\"")]
+#[case(class(["foo"]), "class=\"foo\"")]
+#[case(class(["foo", "bar"]), "class=\"foo bar\"")]
+fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
+    let string = div([attr], []).to_string();
+    assert_eq!(string, format!("<div {expected}></div>"));
 }
 
 #[rstest]
@@ -76,4 +76,22 @@ fn attribute_should_be_escaped() {
         string,
         "<div foo=\"&lt;script&gt;&quot;&quot; { open: !close }\">hello</div>"
     );
+}
+
+#[rstest]
+#[cfg(debug_assertions)]
+#[should_panic]
+fn should_panic_for_invalid_attribute_name(
+    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
+) {
+    Attribute::new(name, "value");
+}
+
+#[rstest]
+#[cfg(debug_assertions)]
+#[should_panic]
+fn should_panic_for_invalid_tag_name(
+    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
+) {
+    Node::new(name, [], []);
 }

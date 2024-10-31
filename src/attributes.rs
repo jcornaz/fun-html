@@ -9,11 +9,11 @@ impl<T: Into<Cow<'static, str>>> From<(&'static str, T)> for Attribute {
 }
 
 pub fn lang(lang: impl Into<Cow<'static, str>>) -> Attribute {
-    ("lang", lang).into()
+    Attribute::new("lang", lang)
 }
 
 pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
-    ("id", id).into()
+    Attribute::new("id", id)
 }
 
 pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {
