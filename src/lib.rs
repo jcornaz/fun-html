@@ -1,7 +1,7 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
 pub mod attributes;
-pub mod nodes;
+pub mod elements;
 
 use std::{borrow::Cow, fmt::Display};
 
@@ -112,9 +112,9 @@ impl Display for Element {
             }
             ElementInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
             ElementInner::Raw(raw) => write!(f, "{raw}")?,
-            ElementInner::Multiple(nodes) => {
-                for node in nodes {
-                    write!(f, "{node}")?;
+            ElementInner::Multiple(elems) => {
+                for elt in elems {
+                    write!(f, "{elt}")?;
                 }
             }
         }

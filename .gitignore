@@ -1,6 +1,3 @@
 # Rust
 /target
 /.cargo/*.toml
-
-# Nodes tools
-/node_modules
