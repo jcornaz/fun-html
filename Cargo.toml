@@ -3,7 +3,7 @@ name = "fun-html"
 version = "0.0.0"
 authors = ["Jonathan Cornaz"]
 edition = "2021"
-rust-version = "1.60.0"
+rust-version = "1.60"
 repository = "https://github.com/jcornaz/fun-html"
 description = "HTML as a rust function!"
 publish = false
@@ -13,7 +13,7 @@ all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
-html-escape = { version = "0.2.13", default-features = false }
+html-escape = { version = "0.2", default-features = false }
 
 [dev-dependencies]
-rstest = { version = "0.23.0", default-features = false }
+rstest = { version = "0.23", default-features = false }
