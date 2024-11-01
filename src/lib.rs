@@ -1,6 +1,42 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
+//! This crate provides a simple and efficient way to generate HTML using Rust functions,
+//! with an intuitive and composable API to create HTML elements.
+//!
+//! The [`elements`] module contains functions to create common HTML elements. Most of them take 2 arguments:
+//! The list of attributes, and the list of children.
+//! For example, `div([id("mydiv")], ["hello".into()])` creates a `<div>` with an ID of "mydiv" containing the text "hello".
+//!
+//! The [`attributes`] module contains functions to create common attributes.
+//!
+//! ```
+//! use fun_html::{attributes::class, elements::h1};
+//!
+//! let greeting = h1(
+//!   [class(["bold"])], // <-- First argument is the attributes
+//!   ["Hello world!".into()], // <-- Second argument is the children
+//! );
+//! assert_eq!(greeting.to_string(), "<h1 class=\"bold\">Hello world!</h1>");
+//! ```
+//! ## Safety
+//!
+//! Text can be inserted by using the `text` function or by using one of the `Into<Element>` implementations.
+//! All text and attribute values are automatically escaped to ensure safe and valid HTML output.
+//!
+//! ## Escape hatches
+//!
+//! If necessary, it is possible to define custom elements and attributes with respectively [`Element::new`] and [`Attribute::new`].
+//!
+//! It is also possible to line raw html with:
+//! * [`elements::raw`] requires to know the full html to inline at compile time, and is therefor considered safe.
+//! * [`elements::raw_unsafe`] can inline html generated at runtime, and is therefore unsafe.
+//!
+//! ## Feature flags
+//!
+//! * `std`: enabled by default. must be disabled to compile to `no_std`
+//! * `rocket_v05`: implements the `Responder` from [rocket](https://rocket.rs) v0.5 for [`Document`] and [`Element`]
+
 pub mod attributes;
 pub mod elements;
 
@@ -13,9 +49,25 @@ extern crate alloc;
 
 use alloc::{borrow::Cow, fmt::Display, vec::Vec};
 
+/// An HTML document (`<!DOCTYPE html>`)
+///
+/// ```
+/// use fun_html::{Document, html, elements::{head, body}};
+/// let doc: Document = html([], [head([], []), body([], [])]);
+///
+/// assert_eq!(doc.to_string(), "<!DOCTYPE html>\n<html><head></head><body></body></html>");
+/// ```
 #[derive(Debug, Clone)]
 pub struct Document(Element);
 
+/// An HTML element
+///
+/// ```
+/// use fun_html::{Element, elements::div};
+/// let element: Element = div([], []);
+///
+/// assert_eq!(element.to_string(), "<div></div>");
+/// ```    
 #[derive(Debug, Clone)]
 pub struct Element(ElementInner);
 
