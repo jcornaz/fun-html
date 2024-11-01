@@ -5,7 +5,7 @@
 This rust crate provides a simple and efficient way to generate HTML using Rust functions,
 with an intuitive and composable API to create HTML elements.
 
-```
+```rust
 use fun_html::{attributes::class, elements::h1};
 
 let greeting = h1(
