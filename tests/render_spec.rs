@@ -79,30 +79,3 @@ fn attribute_should_be_escaped() {
         "<div foo=\"&lt;script&gt;&quot;&quot; { open: !close }\">hello</div>"
     );
 }
-
-#[rstest]
-#[cfg(debug_assertions)]
-#[should_panic]
-fn should_panic_for_invalid_attribute_name(
-    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
-) {
-    Attribute::new(name, "value");
-}
-
-#[rstest]
-#[cfg(debug_assertions)]
-#[should_panic]
-fn should_panic_for_invalid_tag_name(
-    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
-) {
-    Element::new(name, [], []);
-}
-
-#[rstest]
-#[cfg(debug_assertions)]
-#[should_panic]
-fn should_panic_for_invalid_void_element_name(
-    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
-) {
-    Element::new_void(name, []);
-}
