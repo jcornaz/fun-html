@@ -18,9 +18,9 @@ pub fn head(
 
 pub fn title(
     attributes: impl IntoIterator<Item = Attribute>,
-    children: impl IntoIterator<Item = Node>,
+    text: impl Into<Cow<'static, str>>,
 ) -> Node {
-    Node::new("title", attributes, children)
+    Node::new("title", attributes, [text.into().into()])
 }
 
 pub fn body(
@@ -94,6 +94,12 @@ pub fn raw(html: &'static str) -> Node {
 /// See [`raw`] to safely inline HTML that is known at compile time
 pub fn raw_unsafe(html: String) -> Node {
     NodeInner::Raw(html.into()).into()
+}
+
+impl From<Cow<'static, str>> for Node {
+    fn from(value: Cow<'static, str>) -> Self {
+        text(value)
+    }
 }
 
 impl From<&'static str> for Node {

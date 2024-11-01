@@ -17,7 +17,7 @@ fn should_render_html_document() {
     let doc = html(
         [lang("en")],
         [
-            head([], [title([], [text("greeting")])]),
+            head([], [title([], "greeting")]),
             body([], [h1([], [text("Hello world!")])]),
         ],
     );
@@ -47,7 +47,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
 #[case(div([("foo", "bar".to_string()).into()], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]
-#[case(title([("foo", "bar").into()], [text("hello")]), "<title foo=\"bar\">hello</title>")]
+#[case(title([("foo", "bar").into()], "hello"), "<title foo=\"bar\">hello</title>")]
 #[case(body([id("foo")], [text("hello")]), "<body id=\"foo\">hello</body>")]
 #[case(h1([id("foo")], [text("hello")]), "<h1 id=\"foo\">hello</h1>")]
 #[case(h2([id("foo")], [text("hello")]), "<h2 id=\"foo\">hello</h2>")]
