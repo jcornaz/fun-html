@@ -1,9 +1,12 @@
+#![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
 pub mod attributes;
 pub mod elements;
 
-use std::{borrow::Cow, fmt::Display};
+extern crate alloc;
+
+use alloc::{borrow::Cow, fmt::Display, vec::Vec};
 
 #[derive(Debug, Clone)]
 pub struct Document(Element);
@@ -49,7 +52,7 @@ impl Default for Document {
 }
 
 impl Display for Document {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut alloc::fmt::Formatter<'_>) -> alloc::fmt::Result {
         write!(f, "<!DOCTYPE html>\n{}", self.0)
     }
 }
@@ -95,7 +98,7 @@ impl From<ElementInner> for Element {
 }
 
 impl Display for Element {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut alloc::fmt::Formatter<'_>) -> alloc::fmt::Result {
         match &self.0 {
             ElementInner::Parent {
                 tag,
@@ -128,9 +131,9 @@ impl Display for Element {
 }
 
 fn write_attributes(
-    f: &mut std::fmt::Formatter<'_>,
+    f: &mut alloc::fmt::Formatter<'_>,
     attributes: &Vec<Attribute>,
-) -> Result<(), std::fmt::Error> {
+) -> Result<(), alloc::fmt::Error> {
     for attribute in attributes {
         match &attribute.value {
             AttributeValue::String(s) => write!(

@@ -12,6 +12,10 @@ publish = false
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
+[features]
+default = ["std"]
+std = ["html-escape/std"]
+
 [dependencies]
 html-escape = { version = "0.2", default-features = false }
 
