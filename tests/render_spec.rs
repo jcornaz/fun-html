@@ -33,6 +33,13 @@ fn should_render_html_document() {
 #[case(class(["foo", "bar"]), "class=\"foo bar\"")]
 #[case(href("foo"), "href=\"foo\"")]
 #[case(download(), "download")]
+#[case(download_with_name("myfile.txt"), "download=\"myfile.txt\"")]
+#[case(target(Target::Blank), "target=\"_blank\"")]
+#[case(target_blank(), "target=\"_blank\"")]
+#[case(target(Target::Self_), "target=\"_self\"")]
+#[case(target(Target::Top), "target=\"_top\"")]
+#[case(target(Target::Parent), "target=\"_parent\"")]
+#[case(target(Target::Frame("myframe".into())), "target=\"myframe\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     let string = div([attr], []).to_string();
     assert_eq!(string, format!("<div {expected}></div>"));
