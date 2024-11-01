@@ -14,6 +14,15 @@ fn should_panic_for_invalid_attribute_name(
 #[rstest]
 #[cfg(debug_assertions)]
 #[should_panic]
+fn should_panic_for_invalid_attribute_flag_name(
+    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
+) {
+    Attribute::new_flag(name);
+}
+
+#[rstest]
+#[cfg(debug_assertions)]
+#[should_panic]
 fn should_panic_for_invalid_tag_name(
     #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
 ) {

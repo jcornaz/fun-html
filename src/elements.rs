@@ -76,6 +76,13 @@ pub fn h6(
     Element::new("h6", attributes, children)
 }
 
+pub fn a(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("a", attributes, children)
+}
+
 /// HTML escaped text
 pub fn text(value: impl Into<Cow<'static, str>>) -> Element {
     ElementInner::Text(value.into()).into()

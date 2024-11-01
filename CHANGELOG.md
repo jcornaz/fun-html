@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   * Meta (`meta`, `title`)
   * Text (`h1` to `h6`, and `text`)
   * Container (`div`)
+  * Anchor (`a`) and related attributes (`href`, `download`)
   * Escape hatches (`raw` and `raw_unsafe`)
 * implement `From<(&'static str, Cow<'static, str)>` for `Attribute`
 * implement `From<&'static str>` and `From<String>` for `Element`

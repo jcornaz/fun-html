@@ -16,6 +16,14 @@ pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("id", id)
 }
 
+pub fn href(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("href", url)
+}
+
+pub fn download() -> Attribute {
+    Attribute::new_flag("download")
+}
+
 pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {
     let mut values = String::new();
     let mut iter = classes.into_iter();

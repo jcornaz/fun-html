@@ -31,6 +31,8 @@ fn should_render_html_document() {
 #[case(id("foo"), "id=\"foo\"")]
 #[case(class(["foo"]), "class=\"foo\"")]
 #[case(class(["foo", "bar"]), "class=\"foo bar\"")]
+#[case(href("foo"), "href=\"foo\"")]
+#[case(download(), "download")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     let string = div([attr], []).to_string();
     assert_eq!(string, format!("<div {expected}></div>"));
@@ -56,6 +58,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(h4([id("foo")], [text("hello")]), "<h4 id=\"foo\">hello</h4>")]
 #[case(h5([id("foo")], [text("hello")]), "<h5 id=\"foo\">hello</h5>")]
 #[case(h6([id("foo")], [text("hello")]), "<h6 id=\"foo\">hello</h6>")]
+#[case(a([href("/somepath")], ["visit this cool link!".into()]), "<a href=\"/somepath\">visit this cool link!</a>")]
 fn should_render_element(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }

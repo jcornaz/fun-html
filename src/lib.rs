@@ -44,6 +44,7 @@ pub struct Attribute {
 #[derive(Debug, Clone)]
 enum AttributeValue {
     String(Cow<'static, str>),
+    Flag,
 }
 
 impl Default for Document {
@@ -147,6 +148,7 @@ fn write_attributes(
                 attribute.name,
                 html_escape::encode_double_quoted_attribute(s)
             )?,
+            AttributeValue::Flag => write!(f, " {}", attribute.name,)?,
         }
     }
     Ok(())
@@ -154,15 +156,27 @@ fn write_attributes(
 
 impl Attribute {
     pub fn new(name: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
-        debug_assert!(
-            !name.is_empty() && name.chars().all(|c| !c.is_whitespace()),
-            "invalid attribute name: '{name}'"
-        );
+        assert_valid_attribute_name(name);
         Self {
             name,
             value: AttributeValue::String(value.into()),
         }
     }
+
+    pub fn new_flag(name: &'static str) -> Self {
+        assert_valid_attribute_name(name);
+        Self {
+            name,
+            value: AttributeValue::Flag,
+        }
+    }
+}
+
+fn assert_valid_attribute_name(name: &str) {
+    debug_assert!(
+        !name.is_empty() && name.chars().all(|c| !c.is_whitespace()),
+        "invalid attribute name: '{name}'"
+    );
 }
 
 pub fn html(
