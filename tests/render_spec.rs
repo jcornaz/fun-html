@@ -97,3 +97,12 @@ fn should_panic_for_invalid_tag_name(
 ) {
     Element::new(name, [], []);
 }
+
+#[rstest]
+#[cfg(debug_assertions)]
+#[should_panic]
+fn should_panic_for_invalid_void_element_name(
+    #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
+) {
+    Element::new_void(name, []);
+}

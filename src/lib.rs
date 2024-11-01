@@ -61,10 +61,7 @@ impl Element {
         attributes: impl IntoIterator<Item = Attribute>,
         children: impl IntoIterator<Item = Element>,
     ) -> Self {
-        debug_assert!(
-            !tag.is_empty() && tag.chars().all(|c| !c.is_whitespace()),
-            "invalid attribute name: '{tag}'"
-        );
+        assert_valid_tag_name(tag);
         Self(ElementInner::Parent {
             tag,
             attributes: attributes.into_iter().map(Into::into).collect(),
@@ -76,11 +73,19 @@ impl Element {
     ///
     /// [void]: https://developer.mozilla.org/en-US/docs/Glossary/Void_element
     pub fn new_void(tag: &'static str, attributes: impl IntoIterator<Item = Attribute>) -> Self {
+        assert_valid_tag_name(tag);
         Self(ElementInner::Void {
             tag,
             attributes: attributes.into_iter().collect(),
         })
     }
+}
+
+fn assert_valid_tag_name(tag: &str) {
+    debug_assert!(
+        !tag.is_empty() && tag.chars().all(|c| !c.is_whitespace()),
+        "invalid tag name: '{tag}'"
+    );
 }
 
 impl From<ElementInner> for Element {
