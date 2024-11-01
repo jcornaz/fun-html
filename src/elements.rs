@@ -2,6 +2,7 @@ use alloc::{borrow::Cow, string::String, vec::Vec};
 
 use crate::{Attribute, Element, ElementInner};
 
+/// `<div>`
 pub fn div(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -9,6 +10,7 @@ pub fn div(
     Element::new("div", attributes, children)
 }
 
+/// `<head>`
 pub fn head(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -16,10 +18,17 @@ pub fn head(
     Element::new("head", attributes, children)
 }
 
+/// `<meta>`
 pub fn meta(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("meta", attributes)
 }
 
+/// `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+pub fn meta_viewport() -> Element {
+    raw("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")
+}
+
+/// `<title>`
 pub fn title(
     attributes: impl IntoIterator<Item = Attribute>,
     text: impl Into<Cow<'static, str>>,
@@ -27,6 +36,7 @@ pub fn title(
     Element::new("title", attributes, [text.into().into()])
 }
 
+/// `<body>`
 pub fn body(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -34,6 +44,7 @@ pub fn body(
     Element::new("body", attributes, children)
 }
 
+/// `<h1>`
 pub fn h1(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -41,6 +52,7 @@ pub fn h1(
     Element::new("h1", attributes, children)
 }
 
+/// `<h2>`
 pub fn h2(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -48,6 +60,7 @@ pub fn h2(
     Element::new("h2", attributes, children)
 }
 
+/// `<h3>`
 pub fn h3(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -55,6 +68,7 @@ pub fn h3(
     Element::new("h3", attributes, children)
 }
 
+/// `<h4>`
 pub fn h4(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -62,6 +76,7 @@ pub fn h4(
     Element::new("h4", attributes, children)
 }
 
+/// `<h5>`
 pub fn h5(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -69,6 +84,7 @@ pub fn h5(
     Element::new("h5", attributes, children)
 }
 
+/// `<h6>`
 pub fn h6(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
@@ -76,6 +92,7 @@ pub fn h6(
     Element::new("h6", attributes, children)
 }
 
+/// `<a>`
 pub fn a(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,

@@ -40,6 +40,10 @@ fn should_render_html_document() {
 #[case(target(Target::Top), "target=\"_top\"")]
 #[case(target(Target::Parent), "target=\"_parent\"")]
 #[case(target(Target::Frame("myframe".into())), "target=\"myframe\"")]
+#[case(charset("foobar"), "charset=\"foobar\"")]
+#[case(charset_utf_8(), "charset=\"UTF-8\"")]
+#[case(name("hello"), "name=\"hello\"")]
+#[case(content("bla"), "content=\"bla\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     let string = div([attr], []).to_string();
     assert_eq!(string, format!("<div {expected}></div>"));
@@ -54,6 +58,10 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(raw("<my-component></my-component>"), "<my-component></my-component>")]
 #[case(raw_unsafe("<my-component></my-component>".to_string()), "<my-component></my-component>")]
 #[case(meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
+#[case(
+    meta_viewport(),
+    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+)]
 #[case(div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
 #[case(div([("foo", "bar".to_string()).into()], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]

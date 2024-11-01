@@ -2,6 +2,20 @@ use alloc::{borrow::Cow, string::String};
 
 use crate::Attribute;
 
+impl<T: Into<Cow<'static, str>>> From<(&'static str, T)> for Attribute {
+    fn from((key, value): (&'static str, T)) -> Self {
+        Attribute::new(key, value)
+    }
+}
+
+pub fn lang(lang: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("lang", lang)
+}
+
+pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("id", id)
+}
+
 pub enum Target {
     Blank,
     Self_,
@@ -28,20 +42,6 @@ pub fn target_blank() -> Attribute {
     target(Target::Blank)
 }
 
-impl<T: Into<Cow<'static, str>>> From<(&'static str, T)> for Attribute {
-    fn from((key, value): (&'static str, T)) -> Self {
-        Attribute::new(key, value)
-    }
-}
-
-pub fn lang(lang: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("lang", lang)
-}
-
-pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("id", id)
-}
-
 pub fn href(url: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("href", url)
 }
@@ -52,6 +52,23 @@ pub fn download() -> Attribute {
 
 pub fn download_with_name(name: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("download", name)
+}
+
+pub fn charset(charset: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("charset", charset)
+}
+
+/// Alias for `charset("UTF-8")`
+pub fn charset_utf_8() -> Attribute {
+    charset("UTF-8")
+}
+
+pub fn name(name: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("name", name)
+}
+
+pub fn content(content: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("content", content)
 }
 
 pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {
