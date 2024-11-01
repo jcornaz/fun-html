@@ -4,6 +4,11 @@
 pub mod attributes;
 pub mod elements;
 
+mod interop {
+    #[cfg(feature = "rocket_v05")]
+    mod rocket_v05;
+}
+
 extern crate alloc;
 
 use alloc::{borrow::Cow, fmt::Display, vec::Vec};

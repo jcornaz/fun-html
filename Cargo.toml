@@ -15,8 +15,13 @@ rustdoc-args = ["--cfg", "docsrs"]
 [features]
 default = ["std"]
 std = ["html-escape/std"]
+rocket_v05 = ["std", "dep:rocket_v05"]
 
 [dependencies]
+# Public
+rocket_v05 = { package = "rocket", version = "0.5", default-features = false, optional = true }
+
+# Private
 html-escape = { version = "0.2", default-features = false }
 
 [dev-dependencies]
