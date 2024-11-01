@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * `lang`, `id` and `class` attributes
 * Nodes
   * Html document (`html`, `head` and `body`)
-  * Meta (`title`)
+  * Meta (`meta`, `title`)
   * Text (`h1` to `h6`, and `text`)
   * Container (`div`)
   * Escape hatches (`raw` and `raw_unsafe`)

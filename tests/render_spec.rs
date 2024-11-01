@@ -1,6 +1,6 @@
 use rstest::rstest;
 
-use fun_html::{attributes::*, html, nodes::*, Attribute, Document, Node};
+use fun_html::{attributes::*, html, nodes::*, Attribute, Document, Element};
 
 #[test]
 fn should_render_empty_document() {
@@ -44,6 +44,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case([div([], ["a".into()]), div([], ["b".into()])].into(), "<div>a</div><div>b</div>")]
 #[case(raw("<my-component></my-component>"), "<my-component></my-component>")]
 #[case(raw_unsafe("<my-component></my-component>".to_string()), "<my-component></my-component>")]
+#[case(meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
 #[case(div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
 #[case(div([("foo", "bar".to_string()).into()], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(head([id("foo")], [text("hello")]), "<head id=\"foo\">hello</head>")]
@@ -55,7 +56,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(h4([id("foo")], [text("hello")]), "<h4 id=\"foo\">hello</h4>")]
 #[case(h5([id("foo")], [text("hello")]), "<h5 id=\"foo\">hello</h5>")]
 #[case(h6([id("foo")], [text("hello")]), "<h6 id=\"foo\">hello</h6>")]
-fn should_render_node(#[case] def: Node, #[case] expected: &str) {
+fn should_render_node(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }
 
@@ -94,5 +95,5 @@ fn should_panic_for_invalid_attribute_name(
 fn should_panic_for_invalid_tag_name(
     #[values("hello world", "hello\tworld", "hello\nworld", "")] name: &'static str,
 ) {
-    Node::new(name, [], []);
+    Element::new(name, [], []);
 }

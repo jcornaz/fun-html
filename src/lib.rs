@@ -6,21 +6,25 @@ pub mod nodes;
 use std::{borrow::Cow, fmt::Display};
 
 #[derive(Debug, Clone)]
-pub struct Document(Node);
+pub struct Document(Element);
 
 #[derive(Debug, Clone)]
-pub struct Node(NodeInner);
+pub struct Element(ElementInner);
 
 #[derive(Debug, Clone)]
-enum NodeInner {
-    Node {
+enum ElementInner {
+    Parent {
         tag: &'static str,
         attributes: Vec<Attribute>,
-        children: Vec<Node>,
+        children: Vec<Element>,
+    },
+    Void {
+        tag: &'static str,
+        attributes: Vec<Attribute>,
     },
     Text(Cow<'static, str>),
     Raw(Cow<'static, str>),
-    Multiple(Vec<Node>),
+    Multiple(Vec<Element>),
 }
 
 #[derive(Debug, Clone)]
@@ -36,10 +40,10 @@ enum AttributeValue {
 
 impl Default for Document {
     fn default() -> Self {
-        Self(Node::new(
+        Self(Element::new(
             "html",
             [],
-            [Node::new("head", [], []), Node::new("body", [], [])],
+            [Element::new("head", [], []), Element::new("body", [], [])],
         ))
     }
 }
@@ -50,58 +54,65 @@ impl Display for Document {
     }
 }
 
-impl Node {
+impl Element {
+    /// Create a new HTML element from its tag, attributes, and children
     pub fn new(
         tag: &'static str,
         attributes: impl IntoIterator<Item = Attribute>,
-        children: impl IntoIterator<Item = Node>,
+        children: impl IntoIterator<Item = Element>,
     ) -> Self {
         debug_assert!(
             !tag.is_empty() && tag.chars().all(|c| !c.is_whitespace()),
             "invalid attribute name: '{tag}'"
         );
-        Self(NodeInner::Node {
+        Self(ElementInner::Parent {
             tag,
             attributes: attributes.into_iter().map(Into::into).collect(),
             children: children.into_iter().collect(),
         })
     }
+
+    /// Create a new [void] HTML element from its tag and attributes
+    ///
+    /// [void]: https://developer.mozilla.org/en-US/docs/Glossary/Void_element
+    pub fn new_void(tag: &'static str, attributes: impl IntoIterator<Item = Attribute>) -> Self {
+        Self(ElementInner::Void {
+            tag,
+            attributes: attributes.into_iter().collect(),
+        })
+    }
 }
 
-impl From<NodeInner> for Node {
-    fn from(value: NodeInner) -> Self {
+impl From<ElementInner> for Element {
+    fn from(value: ElementInner) -> Self {
         Self(value)
     }
 }
 
-impl Display for Node {
+impl Display for Element {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &self.0 {
-            NodeInner::Node {
+            ElementInner::Parent {
                 tag,
                 attributes,
                 children,
             } => {
                 write!(f, "<{tag}")?;
-                for attribute in attributes {
-                    match &attribute.value {
-                        AttributeValue::String(s) => write!(
-                            f,
-                            " {}=\"{}\"",
-                            attribute.name,
-                            html_escape::encode_double_quoted_attribute(s)
-                        )?,
-                    }
-                }
+                write_attributes(f, attributes)?;
                 write!(f, ">")?;
                 for child in children {
                     write!(f, "{child}")?;
                 }
                 write!(f, "</{tag}>")?;
             }
-            NodeInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
-            NodeInner::Raw(raw) => write!(f, "{raw}")?,
-            NodeInner::Multiple(nodes) => {
+            ElementInner::Void { tag, attributes } => {
+                write!(f, "<{tag}")?;
+                write_attributes(f, attributes)?;
+                write!(f, ">")?;
+            }
+            ElementInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
+            ElementInner::Raw(raw) => write!(f, "{raw}")?,
+            ElementInner::Multiple(nodes) => {
                 for node in nodes {
                     write!(f, "{node}")?;
                 }
@@ -109,6 +120,23 @@ impl Display for Node {
         }
         Ok(())
     }
+}
+
+fn write_attributes(
+    f: &mut std::fmt::Formatter<'_>,
+    attributes: &Vec<Attribute>,
+) -> Result<(), std::fmt::Error> {
+    for attribute in attributes {
+        match &attribute.value {
+            AttributeValue::String(s) => write!(
+                f,
+                " {}=\"{}\"",
+                attribute.name,
+                html_escape::encode_double_quoted_attribute(s)
+            )?,
+        }
+    }
+    Ok(())
 }
 
 impl Attribute {
@@ -126,7 +154,7 @@ impl Attribute {
 
 pub fn html(
     attributes: impl IntoIterator<Item = Attribute>,
-    children: impl IntoIterator<Item = Node>,
+    children: impl IntoIterator<Item = Element>,
 ) -> Document {
-    Document(Node::new("html", attributes, children))
+    Document(Element::new("html", attributes, children))
 }
