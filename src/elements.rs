@@ -36,9 +36,13 @@ pub fn link(attributes: impl IntoIterator<Item = Attribute>) -> Element {
 /// `<script>`
 pub fn script(
     attributes: impl IntoIterator<Item = Attribute>,
-    children: impl IntoIterator<Item = Element>,
+    content: impl Into<Cow<'static, str>>,
 ) -> Element {
-    Element::new("script", attributes, children)
+    Element::new(
+        "script",
+        attributes,
+        [Element(ElementInner::Script(content.into()))],
+    )
 }
 
 /// `<title>`

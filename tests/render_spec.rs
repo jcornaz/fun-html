@@ -59,7 +59,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(raw_unsafe("<my-component></my-component>".to_string()), "<my-component></my-component>")]
 #[case(meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
 #[case(link([("foo", "bar").into()]), "<link foo=\"bar\">")]
-#[case(script([("foo", "bar").into()], ["alert('hello');".into()]), "<script foo=\"bar\">alert('hello');</script>")]
+#[case(script([("foo", "bar").into()], "alert('hello');"), "<script foo=\"bar\">alert('hello');</script>")]
 #[case(
     meta_viewport(),
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
@@ -98,4 +98,10 @@ fn attribute_should_be_escaped() {
         string,
         "<div foo=\"&lt;script&gt;&quot;&quot; { open: !close }\">hello</div>"
     );
+}
+
+#[rstest]
+fn script_should_be_escaped() {
+    let string = script([], "alert('</script>');").to_string();
+    assert_eq!(string, "<script>alert('<\\/script>');</script>");
 }

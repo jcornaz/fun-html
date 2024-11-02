@@ -83,6 +83,7 @@ enum ElementInner {
         attributes: Vec<Attribute>,
     },
     Text(Cow<'static, str>),
+    Script(Cow<'static, str>),
     Raw(Cow<'static, str>),
     Multiple(Vec<Element>),
 }
@@ -177,6 +178,7 @@ impl Display for Element {
                 write!(f, ">")?;
             }
             ElementInner::Text(text) => write!(f, "{}", html_escape::encode_text(text))?,
+            ElementInner::Script(text) => write!(f, "{}", html_escape::encode_script(text))?,
             ElementInner::Raw(raw) => write!(f, "{raw}")?,
             ElementInner::Multiple(elems) => {
                 for elt in elems {
