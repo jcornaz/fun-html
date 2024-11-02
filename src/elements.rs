@@ -124,6 +124,30 @@ pub fn img(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("img", attributes)
 }
 
+/// `<ul>`
+pub fn ul(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("ul", attributes, children)
+}
+
+/// `<ol>`
+pub fn ol(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("ol", attributes, children)
+}
+
+/// `<li>`
+pub fn li(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("li", attributes, children)
+}
+
 /// HTML escaped text
 pub fn text(value: impl Into<Cow<'static, str>>) -> Element {
     ElementInner::Text(value.into()).into()

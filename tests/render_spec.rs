@@ -89,6 +89,8 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(h6([id("foo")], [text("hello")]), "<h6 id=\"foo\">hello</h6>")]
 #[case(a([href("/somepath")], ["visit this cool link!".into()]), "<a href=\"/somepath\">visit this cool link!</a>")]
 #[case(img([src("foo"), alt("bar")]), "<img src=\"foo\" alt=\"bar\">")]
+#[case(ul([("foo", "bar").into()], [li([("a", "b").into()], ["hello".into()])]), "<ul foo=\"bar\"><li a=\"b\">hello</li></ul>")]
+#[case(ol([("foo", "bar").into()], [li([("a", "b").into()], ["hello".into()])]), "<ol foo=\"bar\"><li a=\"b\">hello</li></ol>")]
 fn should_render_element(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }
