@@ -19,6 +19,7 @@
 //! );
 //! assert_eq!(greeting.to_string(), "<h1 class=\"bold\">Hello world!</h1>");
 //! ```
+//!
 //! ## Safety
 //!
 //! Text can be inserted by using the `text` function or by using one of the `Into<Element>` implementations.
@@ -28,9 +29,9 @@
 //!
 //! If necessary, it is possible to define custom elements and attributes with respectively [`Element::new`] and [`Attribute::new`].
 //!
-//! It is also possible to line raw html with:
-//! * [`elements::raw`] requires to know the full html to inline at compile time, and is therefor considered safe.
-//! * [`elements::raw_unsafe`] can inline html generated at runtime, and is therefore unsafe.
+//! It is also possible to inline raw html with:
+//! * [`elements::raw`]: inline HTML that is known at compile time, and is therefore considered safe.
+//! * [`elements::raw_unsafe`]: can inline HTML built at runtime, and is therefore unsafe.
 //!
 //! ## Feature flags
 //!
