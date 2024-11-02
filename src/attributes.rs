@@ -46,6 +46,38 @@ pub fn href(url: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("href", url)
 }
 
+pub fn rel(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("rel", url)
+}
+
+pub fn src(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("src", url)
+}
+
+pub fn type_(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("type", url)
+}
+
+pub fn integrity(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("integrity", url)
+}
+
+pub fn defer() -> Attribute {
+    Attribute::new_flag("defer")
+}
+
+pub fn async_() -> Attribute {
+    Attribute::new_flag("async")
+}
+
+pub fn crossorigin_anonymous() -> Attribute {
+    Attribute::new("crossorigin", "anonymous")
+}
+
+pub fn crossorigin_use_credentials() -> Attribute {
+    Attribute::new("crossorigin", "use-credentials")
+}
+
 pub fn download() -> Attribute {
     Attribute::new_flag("download")
 }

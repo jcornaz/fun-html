@@ -17,9 +17,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   * `id`
   * `class`
   * `name`
+  * `src`
 * Elements
   * Html document (`html`, `head` and `body`)
-  * Meta (`meta`, `meta_viewport`, `link`, `script`, `title`) and related attributes (`charset`, `content`)
+  * Meta (`meta`, `meta_viewport`, `link`, `script`, `title`) and related attributes
+    (`charset`, `content`, `rel`, `async`, `defer`, `integrity`, `type` and `crossorigin`)
   * Text (`h1` to `h6`, and `text`)
   * Container (`div`)
   * Anchor (`a`) and related attributes (`href`, `target` and `download`)
