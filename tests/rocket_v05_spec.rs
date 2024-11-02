@@ -6,8 +6,8 @@ extern crate rocket_v05 as rocket;
 use rstest::{fixture, rstest};
 
 use fun_html::{
-    attributes::id,
-    elements::{body, div, head},
+    attr::id,
+    elt::{body, div, head},
     html, Document, Element,
 };
 use rocket::{

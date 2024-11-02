@@ -2,28 +2,25 @@
 
 ![rustc](https://img.shields.io/badge/rustc-1.60+-blue?logo=rust)
 
-This rust crate provides a simple and efficient way to generate HTML using Rust functions,
+This rust library provides a simple and efficient way to generate HTML using Rust functions,
 with an intuitive and composable API to create HTML elements.
 
 ```rust
-use fun_html::{attributes::class, elements::h1};
+use fun_html::{attr::class, elt::h1};
 
 let greeting = h1(
- [class(["bold"])], // <-- First argument is the attributes
- ["Hello world!".into()], // <-- Second argument is the children
+  [class(["bold"])], // <-- attributes
+  ["Hello world!".into()], // <-- children
 );
-assert_eq!(greeting.to_string(), "<h1 class=\"bold\">Hello world!</h1>");
+assert_eq!(greeting.to_string(), r#"<h1 class="bold">Hello world!</h1>"#);
 ```
-## Feature flags
-
-* `std`: enabled by default. must be disabled to compile to `no_std`
-* `rocket_v05`: implements the `Responder` from [rocket](https://rocket.rs) v0.5 for [`Document`] and [`Element`]
 
 ## MSRV
 
 The minimum supported rust version is currently `1.60`.
 
 It will be updated when required, and that will not be considered a breaking change (it can happen in a minor version).
+
 
 ## MIT License
 

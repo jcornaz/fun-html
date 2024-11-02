@@ -1,6 +1,6 @@
 use rstest::rstest;
 
-use fun_html::{attributes::*, elements::*, html, Attribute, Document, Element};
+use fun_html::{attr::*, elt::*, html, Attribute, Document, Element};
 
 #[test]
 fn should_render_empty_document() {

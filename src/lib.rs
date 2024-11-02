@@ -4,14 +4,17 @@
 //! This crate provides a simple and efficient way to generate HTML using Rust functions,
 //! with an intuitive and composable API to create HTML elements.
 //!
-//! The [`elements`] module contains functions to create common HTML elements. Most of them take 2 arguments:
+//! The [`elt`] module contains functions to create common HTML elements. Most of them take 2 arguments:
 //! The list of attributes, and the list of children.
 //! For example, `div([id("mydiv")], ["hello".into()])` creates a `<div>` with an ID of "mydiv" containing the text "hello".
 //!
-//! The [`attributes`] module contains functions to create common attributes.
+//! The [`attr`] module contains functions to create common attributes.
+//!
+//! Text can be inserted by using the [`elt::text`] function or by using one of the `Into<Element>` implementations.//! ```
+//! All text and attribute values are automatically escaped to ensure safe and valid HTML output.
 //!
 //! ```
-//! use fun_html::{attributes::class, elements::h1};
+//! use fun_html::{attr::class, elt::h1};
 //!
 //! let greeting = h1(
 //!   [class(["bold"])], // <-- attributes
@@ -20,29 +23,24 @@
 //! assert_eq!(greeting.to_string(), r#"<h1 class="bold">Hello world!</h1>"#);
 //! ```
 //!
-//! ## Safety
-//!
-//! Text can be inserted by using the `text` function or by using one of the `Into<Element>` implementations.
-//! All text and attribute values are automatically escaped to ensure safe and valid HTML output.
-//!
 //! ## Escape hatches
 //!
 //! If necessary, it is possible to define custom elements and attributes with respectively [`Element::new`] and [`Attribute::new`].
 //!
-//! There is also an implementation of `From<(&'static str, &'static str)>` and `From<(&'static str, String)>` for `Attribute`,
-//! So it is possible to use custom attribute on the fly (example: `div([("hx-get", "/values").into()], [])`)
+//! It is also possible to declare custom attributes on the fly like this: `div([("hx-get", "/values").into()], [])`)
 //!
 //! It is also possible to inline raw html with:
-//! * [`elements::raw`]: inline HTML that is known at compile time, and is therefore considered safe.
-//! * [`elements::raw_unsafe`]: can inline HTML built at runtime, and is therefore unsafe.
+//! * [`elt::raw`]: inline HTML that is known at compile time, and is therefore considered safe.
+//! * [`elt::raw_unsafe`]: can inline HTML built at runtime, and is therefore unsafe.
+//!
 //!
 //! ## Feature flags
 //!
 //! * `std`: enabled by default. must be disabled to compile to `no_std`
 //! * `rocket_v05`: implements the `Responder` from [rocket](https://rocket.rs) v0.5 for [`Document`] and [`Element`]
 
-pub mod attributes;
-pub mod elements;
+pub mod attr;
+pub mod elt;
 
 mod interop {
     #[cfg(feature = "rocket_v05")]
@@ -56,7 +54,7 @@ use alloc::{borrow::Cow, fmt::Display, vec::Vec};
 /// An HTML document (`<!DOCTYPE html>`)
 ///
 /// ```
-/// use fun_html::{Document, html, elements::{head, body}};
+/// use fun_html::{Document, html, elt::{head, body}};
 /// let doc: Document = html([], [head([], []), body([], [])]);
 ///
 /// assert_eq!(doc.to_string(), "<!DOCTYPE html>\n<html><head></head><body></body></html>");
@@ -67,7 +65,7 @@ pub struct Document(Element);
 /// An HTML element
 ///
 /// ```
-/// use fun_html::{Element, elements::div};
+/// use fun_html::{Element, elt::div};
 /// let element: Element = div([], []);
 ///
 /// assert_eq!(element.to_string(), "<div></div>");
