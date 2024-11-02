@@ -14,10 +14,10 @@
 //! use fun_html::{attributes::class, elements::h1};
 //!
 //! let greeting = h1(
-//!   [class(["bold"]), ("my-custom-arg", "123").into()], // <-- First argument is the attributes
-//!   ["Hello world!".into()], // <-- Second argument is the children
+//!   [class(["bold"])], // <-- attributes
+//!   ["Hello world!".into()], // <-- children
 //! );
-//! assert_eq!(greeting.to_string(), r#"<h1 class="bold" my-custom-arg="123">Hello world!</h1>"#);
+//! assert_eq!(greeting.to_string(), r#"<h1 class="bold">Hello world!</h1>"#);
 //! ```
 //!
 //! ## Safety
@@ -28,6 +28,9 @@
 //! ## Escape hatches
 //!
 //! If necessary, it is possible to define custom elements and attributes with respectively [`Element::new`] and [`Attribute::new`].
+//!
+//! There is also an implementation of `From<(&'static str, &'static str)>` and `From<(&'static str, String)>` for `Attribute`,
+//! So it is possible to use custom attribute on the fly (example: `div([("hx-get", "/values").into()], [])`)
 //!
 //! It is also possible to inline raw html with:
 //! * [`elements::raw`]: inline HTML that is known at compile time, and is therefore considered safe.
