@@ -68,6 +68,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
 #[case(link([("foo", "bar").into()]), "<link foo=\"bar\">")]
 #[case(script([("foo", "bar").into()], "alert('hello');"), "<script foo=\"bar\">alert('hello');</script>")]
+#[case(script_empty([src("/foo.js")]), "<script src=\"/foo.js\"></script>")]
 #[case(
     meta_viewport(),
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
