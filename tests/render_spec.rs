@@ -52,6 +52,9 @@ fn should_render_html_document() {
 #[case(charset_utf_8(), "charset=\"UTF-8\"")]
 #[case(name("hello"), "name=\"hello\"")]
 #[case(content("bla"), "content=\"bla\"")]
+#[case(alt("bla"), "alt=\"bla\"")]
+#[case(width("10"), "width=\"10\"")]
+#[case(height("10"), "height=\"10\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     let string = div([attr], []).to_string();
     assert_eq!(string, format!("<div {expected}></div>"));
@@ -85,6 +88,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(h5([id("foo")], [text("hello")]), "<h5 id=\"foo\">hello</h5>")]
 #[case(h6([id("foo")], [text("hello")]), "<h6 id=\"foo\">hello</h6>")]
 #[case(a([href("/somepath")], ["visit this cool link!".into()]), "<a href=\"/somepath\">visit this cool link!</a>")]
+#[case(img([src("foo"), alt("bar")]), "<img src=\"foo\" alt=\"bar\">")]
 fn should_render_element(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }

@@ -54,6 +54,18 @@ pub fn src(url: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("src", url)
 }
 
+pub fn alt(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("alt", url)
+}
+
+pub fn width(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("width", url)
+}
+
+pub fn height(url: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("height", url)
+}
+
 pub fn type_(url: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("type", url)
 }

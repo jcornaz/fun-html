@@ -21,10 +21,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * Elements
   * Html document (`html`, `head` and `body`)
   * Meta (`meta`, `meta_viewport`, `link`, `script`, `title`) and related attributes
-    (`charset`, `content`, `rel`, `async`, `defer`, `integrity`, `type` and `crossorigin`)
+    (`charset`, `content`, `rel`, `async`, `defer`, `integrity`, `type`, `src`, and `crossorigin`)
   * Text (`h1` to `h6`, and `text`)
   * Container (`div`)
   * Anchor (`a`) and related attributes (`href`, `target` and `download`)
+    * Image (`img`) and related attributes (`src`, `alt`, `width` and `height`)
   * Escape hatches (`raw` and `raw_unsafe`)
 * implement `From<(&'static str, Cow<'static, str)>` for `Attribute`
 * implement `From<&'static str>` and `From<String>` for `Element`

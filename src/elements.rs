@@ -119,6 +119,11 @@ pub fn a(
     Element::new("a", attributes, children)
 }
 
+/// `<img>`
+pub fn img(attributes: impl IntoIterator<Item = Attribute>) -> Element {
+    Element::new_void("img", attributes)
+}
+
 /// HTML escaped text
 pub fn text(value: impl Into<Cow<'static, str>>) -> Element {
     ElementInner::Text(value.into()).into()
