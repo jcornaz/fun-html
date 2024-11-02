@@ -1,3 +1,9 @@
+//! Common HTML elements
+//!
+//! Note that you may create your own element with [`Element::new`] or [`Element::new_void`]
+//!
+//! It is also possible to inline raw HTML with [`raw`] and [`raw_unsafe`]
+
 use alloc::{borrow::Cow, string::String, vec::Vec};
 
 use crate::{Attribute, Element, ElementInner};

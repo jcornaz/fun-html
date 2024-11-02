@@ -1,5 +1,6 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![warn(missing_docs)]
 
 //! This crate provides a simple and efficient way to generate HTML using Rust functions,
 //! with an intuitive and composable API to create HTML elements.
@@ -53,8 +54,10 @@ use alloc::{borrow::Cow, fmt::Display, vec::Vec};
 
 /// An HTML document (`<!DOCTYPE html>`)
 ///
+/// ## Example
+///
 /// ```
-/// use fun_html::{Document, html, elt::{head, body}};
+/// # use fun_html::{Document, html, elt::{head, body}};
 /// let doc: Document = html([], [head([], []), body([], [])]);
 ///
 /// assert_eq!(doc.to_string(), "<!DOCTYPE html>\n<html><head></head><body></body></html>");
@@ -64,8 +67,12 @@ pub struct Document(Element);
 
 /// An HTML element
 ///
+/// It can be created via [`Self::new`], [`Self::new_void`]
+///
+/// ## Example
+///
 /// ```
-/// use fun_html::{Element, elt::div};
+/// # use fun_html::{Element, elt::div};
 /// let element: Element = div([], []);
 ///
 /// assert_eq!(element.to_string(), "<div></div>");
@@ -90,6 +97,22 @@ enum ElementInner {
     Multiple(Vec<Element>),
 }
 
+/// An attribute
+///
+/// It can be created via [`Self::new`], [`Self::new_flag`]
+/// or by converting from ither `(&'static str, &'static str)` or `(&'static str, String)`.
+///
+/// See [`attr`] for a collection of common attributes
+///
+/// ## Example
+///
+/// ```
+/// # use fun_html::attr::id;
+/// assert_eq!(
+///   id("foo").to_string(),
+///   r#"id="foo""#,
+/// )
+/// ```    
 #[derive(Debug, Clone)]
 pub struct Attribute {
     name: &'static str,
@@ -134,6 +157,8 @@ impl Element {
     }
 
     /// Create a new [void] HTML element from its tag and attributes
+    ///
+    /// ("void" element cannot have children and do not need a closing tag)
     ///
     /// [void]: https://developer.mozilla.org/en-US/docs/Glossary/Void_element
     pub fn new_void(tag: &'static str, attributes: impl IntoIterator<Item = Attribute>) -> Self {
@@ -197,20 +222,25 @@ fn write_attributes(
     attributes: &Vec<Attribute>,
 ) -> Result<(), alloc::fmt::Error> {
     for attribute in attributes {
-        match &attribute.value {
-            AttributeValue::String(s) => write!(
-                f,
-                " {}=\"{}\"",
-                attribute.name,
-                html_escape::encode_double_quoted_attribute(s)
-            )?,
-            AttributeValue::Flag => write!(f, " {}", attribute.name,)?,
-        }
+        write!(f, " {attribute}")?;
     }
     Ok(())
 }
 
+impl Display for Attribute {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "{}", self.name)?;
+        match &self.value {
+            AttributeValue::String(s) => {
+                write!(f, "=\"{}\"", html_escape::encode_double_quoted_attribute(s))
+            }
+            AttributeValue::Flag => Ok(()),
+        }
+    }
+}
+
 impl Attribute {
+    /// Create a new attribute
     pub fn new(name: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
         assert_valid_attribute_name(name);
         Self {
@@ -219,6 +249,7 @@ impl Attribute {
         }
     }
 
+    /// Create a new flag attribute (that doesn't take a value)
     pub fn new_flag(name: &'static str) -> Self {
         assert_valid_attribute_name(name);
         Self {
@@ -235,6 +266,19 @@ fn assert_valid_attribute_name(name: &str) {
     );
 }
 
+/// Create an HTML [`Document`]
+///
+/// You must pass the [`elt::head`] and [`elt::body`] element as you would with any other element.
+///
+/// ## Example
+///
+/// ```
+/// # use fun_html::{html, elt::{head, body, title, h1}, attr::{lang}};
+/// let document = html([lang("en")], [
+///     head([], [title([], "Greetings")]),
+///     body([], [h1([], ["Hello world!".into()])]),
+/// ]);
+/// ```
 pub fn html(
     attributes: impl IntoIterator<Item = Attribute>,
     children: impl IntoIterator<Item = Element>,
