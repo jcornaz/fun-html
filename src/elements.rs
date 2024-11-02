@@ -28,6 +28,19 @@ pub fn meta_viewport() -> Element {
     raw("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")
 }
 
+/// `<link>`
+pub fn link(attributes: impl IntoIterator<Item = Attribute>) -> Element {
+    Element::new_void("link", attributes)
+}
+
+/// `<script>`
+pub fn script(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("script", attributes, children)
+}
+
 /// `<title>`
 pub fn title(
     attributes: impl IntoIterator<Item = Attribute>,
