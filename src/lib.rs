@@ -14,10 +14,10 @@
 //! use fun_html::{attributes::class, elements::h1};
 //!
 //! let greeting = h1(
-//!   [class(["bold"])], // <-- First argument is the attributes
+//!   [class(["bold"]), ("my-custom-arg", "123").into()], // <-- First argument is the attributes
 //!   ["Hello world!".into()], // <-- Second argument is the children
 //! );
-//! assert_eq!(greeting.to_string(), "<h1 class=\"bold\">Hello world!</h1>");
+//! assert_eq!(greeting.to_string(), r#"<h1 class="bold" my-custom-arg="123">Hello world!</h1>"#);
 //! ```
 //!
 //! ## Safety
