@@ -111,6 +111,131 @@ pub fn h6(
     Element::new("h6", attributes, children)
 }
 
+/// `<p>`
+pub fn p(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("p", attributes, children)
+}
+
+/// `<br>`
+pub fn br(attributes: impl IntoIterator<Item = Attribute>) -> Element {
+    Element::new_void("br", attributes)
+}
+
+/// `<small>`
+pub fn small(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("small", attributes, children)
+}
+
+/// `<span>`
+pub fn span(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("span", attributes, children)
+}
+
+/// `<table>`
+pub fn table(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("table", attributes, children)
+}
+
+/// `<tr>`
+pub fn tr(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("tr", attributes, children)
+}
+
+/// `<td>`
+pub fn td(
+    attdibutes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("td", attdibutes, children)
+}
+
+/// `<th>`
+pub fn th(
+    attdibutes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("th", attdibutes, children)
+}
+
+/// `<thead>`
+pub fn thead(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("thead", attributes, children)
+}
+
+/// `<tbody>`
+pub fn tbody(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("tbody", attributes, children)
+}
+
+/// `<tfoot>`
+pub fn tfoot(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("tfoot", attributes, children)
+}
+
+/// `<section>`
+pub fn section(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("section", attributes, children)
+}
+
+/// `<article>`
+pub fn article(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("article", attributes, children)
+}
+
+/// `<header>`
+pub fn header(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("header", attributes, children)
+}
+
+/// `<main>`
+pub fn main(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("main", attributes, children)
+}
+
+/// `<footer>`
+pub fn footer(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("footer", attributes, children)
+}
+
 /// `<a>`
 pub fn a(
     attributes: impl IntoIterator<Item = Attribute>,

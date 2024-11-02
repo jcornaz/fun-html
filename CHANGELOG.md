@@ -22,8 +22,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   * Html document (`html`, `head` and `body`)
   * Meta (`meta`, `meta_viewport`, `link`, `script`, `title`) and related attributes
     (`charset`, `content`, `rel`, `async`, `defer`, `integrity`, `type`, `src`, and `crossorigin`)
-  * Text (`h1` to `h6`, and `text`)
-  * Container (`div`)
+  * Text (`h1` to `h6`, `p`, `span`, `small`, `br` and `text`)
+  * Container (`div`, `article`, `section`, `header`, `main`, `footer`)
+  * Table (`table`, `thead`, `tbody`, `tfoot`, `tr`, `th`, `td`)
   * Anchor (`a`) and related attributes (`href`, `target` and `download`)
   * Image (`img`) and related attributes (`src`, `alt`, `width` and `height`)
   * Lists (`ul`, `ol` and `li`)
