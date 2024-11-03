@@ -6,7 +6,8 @@ edition = "2021"
 rust-version = "1.60"
 repository = "https://github.com/jcornaz/fun-html"
 description = "HTML as a rust function!"
-publish = false
+categories = ["template-engine"]
+keywords = ["html", "html-rendering", "web", "functional"]
 
 [package.metadata.docs.rs]
 all-features = true
