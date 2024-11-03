@@ -29,6 +29,11 @@ let element = if list_values {
 assert_eq!(element.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>")
 ```
 
+## Feature flags
+
+* `std`: enabled by default. must be disabled to compile to `no_std`
+* `rocket_v05`: implements the [`Responder` trait from rocket 0.5](https://docs.rs/rocket/0.5/rocket/response/trait.Responder.html) for [`Document`] and [`Element`]
+
 
 ## MSRV
 

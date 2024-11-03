@@ -53,7 +53,7 @@
 //! ## Feature flags
 //!
 //! * `std`: enabled by default. must be disabled to compile to `no_std`
-//! * `rocket_v05`: implements the `Responder` from [rocket](https://rocket.rs) v0.5 for [`Document`] and [`Element`]
+//! * `rocket_v05`: implements the [`Responder` trait from rocket 0.5](https://docs.rs/rocket/0.5/rocket/response/trait.Responder.html) for [`Document`] and [`Element`]
 
 pub mod attr;
 pub mod elt;
