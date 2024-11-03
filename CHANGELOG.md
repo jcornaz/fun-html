@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+
+## [1.0.0] - 2024-11-03
+
 ### Added 
 
 * `Element`, `Attribute` and `Document` types
@@ -38,4 +41,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   * `std`: Enabled by default. Disable it to compile to `no_std`
   * `rocket_v05` : implement [`rocket::response::Responder`](https://docs.rs/rocket/latest/rocket/response/trait.Responder.html) for `Document` and `Element` (for rocket 0.5)
 
-[Unreleased]: https://github.com/jcornaz/fun-html/compare/...HEAD
+[Unreleased]: https://github.com/jcornaz/fun-html/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/jcornaz/fun-html/compare/...v1.0.0
