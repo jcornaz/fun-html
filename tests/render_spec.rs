@@ -35,6 +35,20 @@ fn should_render_html_document() {
 #[case(rel("foo"), "rel=\"foo\"")]
 #[case(src("foo"), "src=\"foo\"")]
 #[case(type_("foo"), "type=\"foo\"")]
+#[case(type_text(), "type=\"text\"")]
+#[case(type_password(), "type=\"password\"")]
+#[case(type_number(), "type=\"number\"")]
+#[case(type_tel(), "type=\"tel\"")]
+#[case(type_file(), "type=\"file\"")]
+#[case(type_checkbox(), "type=\"checkbox\"")]
+#[case(type_radio(), "type=\"radio\"")]
+#[case(type_range(), "type=\"range\"")]
+#[case(type_email(), "type=\"email\"")]
+#[case(type_date(), "type=\"date\"")]
+#[case(type_month(), "type=\"month\"")]
+#[case(type_hidden(), "type=\"hidden\"")]
+#[case(type_reset(), "type=\"reset\"")]
+#[case(type_submit(), "type=\"submit\"")]
 #[case(integrity("foo"), "integrity=\"foo\"")]
 #[case(defer(), "defer")]
 #[case(async_(), "async")]
@@ -125,6 +139,12 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     form([action("/do_something"), method_get()], [input([name("foo")])]),
     r#"<form action="/do_something" method="get"><input name="foo"></form>"#
 )]
+#[case(
+    select([name("foo")], [option([value("bar")], ["coucou".into()])]),
+    r#"<select name="foo"><option value="bar">coucou</option></select>"#
+)]
+#[case(button([("foo", "bar").into()], ["hello".into()]), "<button foo=\"bar\">hello</button>")]
+#[case(label([for_("foo")], ["hello".into()]), "<label for=\"foo\">hello</label>")]
 fn should_render_element(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }

@@ -310,6 +310,38 @@ pub fn input(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("input", attributes)
 }
 
+/// `<select>`
+pub fn select(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("select", attributes, children)
+}
+
+/// `<option>`
+pub fn option(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("option", attributes, children)
+}
+
+/// `<button>`
+pub fn button(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("button", attributes, children)
+}
+
+/// `<label>`
+pub fn label(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("label", attributes, children)
+}
+
 /// HTML escaped text
 pub fn text(value: impl Into<Cow<'static, str>>) -> Element {
     ElementInner::Text(value.into()).into()

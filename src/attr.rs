@@ -85,43 +85,113 @@ pub fn target_blank() -> Attribute {
 }
 
 /// `href` attribute
-pub fn href(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("href", url)
+pub fn href(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("href", value)
 }
 
 /// `rel` atribute
-pub fn rel(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("rel", url)
+pub fn rel(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("rel", value)
 }
 
 /// `src` atribute
-pub fn src(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("src", url)
+pub fn src(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("src", value)
 }
 
 /// `alt` atribute
-pub fn alt(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("alt", url)
+pub fn alt(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("alt", value)
 }
 
 /// `width` atribute
-pub fn width(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("width", url)
+pub fn width(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("width", value)
 }
 
 /// `height` atribute
-pub fn height(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("height", url)
+pub fn height(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("height", value)
 }
 
 /// `type` atribute
-pub fn type_(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("type", url)
+pub fn type_(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("type", value)
+}
+
+/// `type="text"`
+pub fn type_text() -> Attribute {
+    Attribute::new("type", "text")
+}
+
+/// `type="password"`
+pub fn type_password() -> Attribute {
+    Attribute::new("type", "password")
+}
+
+/// `type="number"` (number input)
+pub fn type_number() -> Attribute {
+    Attribute::new("type", "number")
+}
+
+/// `type="tel"` (phone number input)
+pub fn type_tel() -> Attribute {
+    Attribute::new("type", "tel")
+}
+
+/// `type="file"` (file input)
+pub fn type_file() -> Attribute {
+    Attribute::new("type", "file")
+}
+
+/// `type="checkbox"` (checkbox input)
+pub fn type_checkbox() -> Attribute {
+    Attribute::new("type", "checkbox")
+}
+
+/// `type="radio"` (radio input)
+pub fn type_radio() -> Attribute {
+    Attribute::new("type", "radio")
+}
+
+/// `type="range"` (range input)
+pub fn type_range() -> Attribute {
+    Attribute::new("type", "range")
+}
+
+/// `type="email"` (email input)
+pub fn type_email() -> Attribute {
+    Attribute::new("type", "email")
+}
+
+/// `type="date"` (date input)
+pub fn type_date() -> Attribute {
+    Attribute::new("type", "date")
+}
+
+/// `type="month"` (month input)
+pub fn type_month() -> Attribute {
+    Attribute::new("type", "month")
+}
+
+/// `type="hidden"` (hidden input)
+pub fn type_hidden() -> Attribute {
+    Attribute::new("type", "hidden")
+}
+
+/// `type="reset"` (reset button)
+pub fn type_reset() -> Attribute {
+    Attribute::new("type", "reset")
+}
+
+/// `type="submit"` (reset button)
+pub fn type_submit() -> Attribute {
+    Attribute::new("type", "submit")
 }
 
 /// `integrity` atribute
-pub fn integrity(url: impl Into<Cow<'static, str>>) -> Attribute {
-    Attribute::new("integrity", url)
+pub fn integrity(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("integrity", value)
 }
 
 /// `defer` atribute
