@@ -119,12 +119,12 @@ pub fn type_(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("type", value)
 }
 
-/// `type="text"`
+/// `type="text"` (text input)
 pub fn type_text() -> Attribute {
     Attribute::new("type", "text")
 }
 
-/// `type="password"`
+/// `type="password"` (password input)
 pub fn type_password() -> Attribute {
     Attribute::new("type", "password")
 }
