@@ -28,6 +28,7 @@ fn should_render_html_document() {
 #[case(("foo", "bar").into(), "foo=\"bar\"")]
 #[case(("x-on:keyup.enter", "doSomething").into(), "x-on:keyup.enter=\"doSomething\"")]
 #[case(("@keyup.enter", "doSomething").into(), "@keyup.enter=\"doSomething\"")]
+#[case(Attribute::new_unsafe_name("hello".to_string(), "world".to_string()), "hello=\"world\"")]
 #[case(id("foo"), "id=\"foo\"")]
 #[case(class(["foo"]), "class=\"foo\"")]
 #[case(class(["foo", "bar"]), "class=\"foo bar\"")]

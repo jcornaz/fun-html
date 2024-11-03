@@ -131,7 +131,7 @@ enum ElementInner {
 /// ```    
 #[derive(Debug, Clone)]
 pub struct Attribute {
-    name: &'static str,
+    name: Cow<'static, str>,
     value: AttributeValue,
 }
 
@@ -270,7 +270,7 @@ impl Attribute {
     pub fn new(name: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
         assert_valid_attribute_name(name);
         Self {
-            name,
+            name: name.into(),
             value: AttributeValue::String(value.into()),
         }
     }
@@ -279,7 +279,7 @@ impl Attribute {
     pub fn new_int(name: &'static str, value: i32) -> Self {
         assert_valid_attribute_name(name);
         Self {
-            name,
+            name: name.into(),
             value: AttributeValue::Int(value),
         }
     }
@@ -288,8 +288,24 @@ impl Attribute {
     pub fn new_flag(name: &'static str) -> Self {
         assert_valid_attribute_name(name);
         Self {
-            name,
+            name: name.into(),
             value: AttributeValue::None,
+        }
+    }
+
+    /// Create a new attribute with a name generated at runtime
+    ///
+    /// This **IS NOT SAFE** as the attribute name is not escaped.
+    /// It is necessary to control or validate the attribute name to avoid being vulnerable to XSS attacks.
+    ///
+    /// The attribute value is escaped normally.
+    pub fn new_unsafe_name(
+        name: impl Into<Cow<'static, str>>,
+        value: impl Into<Cow<'static, str>>,
+    ) -> Self {
+        Self {
+            name: name.into(),
+            value: AttributeValue::String(value.into()),
         }
     }
 }
