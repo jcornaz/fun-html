@@ -15,6 +15,14 @@ let greeting = h1(
 assert_eq!(greeting.to_string(), r#"<h1 class="bold">Hello world!</h1>"#);
 ```
 
+Because those are simple rust functions, it is easy to leverage rust features like conditions, loops and iterators:
+
+```rust
+let list = ul([], (1..=3).map(|n| li([], [n.to_string().into()])));
+assert_eq!(list.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>");
+```
+
+
 ## MSRV
 
 The minimum supported rust version is currently `1.60`.
