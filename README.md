@@ -1,6 +1,7 @@
 # fun-html
 
-![rustc](https://img.shields.io/badge/rustc-1.60+-blue?logo=rust)
+![License](https://img.shields.io/github/license/jcornaz/fun-html)
+![MSRV](https://img.shields.io/crates/msrv/fun-html)
 
 This rust library provides a simple and efficient way to generate HTML using Rust functions,
 with an intuitive and composable API to create HTML elements.
