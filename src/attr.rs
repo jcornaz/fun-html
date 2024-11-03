@@ -89,32 +89,52 @@ pub fn href(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("href", value)
 }
 
-/// `rel` atribute
+/// `rel` attribute
 pub fn rel(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("rel", value)
 }
 
-/// `src` atribute
+/// `src` attribute
 pub fn src(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("src", value)
 }
 
-/// `alt` atribute
+/// `alt` attribute
 pub fn alt(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("alt", value)
 }
 
-/// `width` atribute
+/// `width` attribute
 pub fn width(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("width", value)
 }
 
-/// `height` atribute
+/// `height` attribute
 pub fn height(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("height", value)
 }
 
-/// `type` atribute
+/// `width` attribute with an `i32` value
+pub fn width_int(value: i32) -> Attribute {
+    Attribute::new_int("width", value)
+}
+
+/// `height` attribute with an `i32` value
+pub fn height_int(value: i32) -> Attribute {
+    Attribute::new_int("height", value)
+}
+
+/// `cols` attribute
+pub fn cols(value: i32) -> Attribute {
+    Attribute::new_int("cols", value)
+}
+
+/// `rows` attribute
+pub fn rows(value: i32) -> Attribute {
+    Attribute::new_int("rows", value)
+}
+
+/// `type` attribute
 pub fn type_(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("type", value)
 }
@@ -189,17 +209,17 @@ pub fn type_submit() -> Attribute {
     Attribute::new("type", "submit")
 }
 
-/// `integrity` atribute
+/// `integrity` attribute
 pub fn integrity(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("integrity", value)
 }
 
-/// `defer` atribute
+/// `defer` attribute
 pub fn defer() -> Attribute {
     Attribute::new_flag("defer")
 }
 
-/// `async` atribute
+/// `async` attribute
 pub fn async_() -> Attribute {
     Attribute::new_flag("async")
 }

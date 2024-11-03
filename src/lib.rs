@@ -132,7 +132,14 @@ enum ElementInner {
 #[derive(Debug, Clone)]
 pub struct Attribute {
     name: &'static str,
-    value: Option<Cow<'static, str>>,
+    value: AttributeValue,
+}
+
+#[derive(Debug, Clone)]
+enum AttributeValue {
+    String(Cow<'static, str>),
+    Int(i32),
+    None,
 }
 
 impl Default for Document {
@@ -241,12 +248,18 @@ fn write_attributes(
 impl Display for Attribute {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "{}", self.name)?;
-        if let Some(value) = self.value.as_ref() {
-            write!(
-                f,
-                "=\"{}\"",
-                html_escape::encode_double_quoted_attribute(value)
-            )?;
+        match &self.value {
+            AttributeValue::String(value) => {
+                write!(
+                    f,
+                    "=\"{}\"",
+                    html_escape::encode_double_quoted_attribute(value)
+                )?;
+            }
+            AttributeValue::Int(int) => {
+                write!(f, "=\"{int}\"",)?;
+            }
+            AttributeValue::None => (),
         }
         Ok(())
     }
@@ -258,14 +271,26 @@ impl Attribute {
         assert_valid_attribute_name(name);
         Self {
             name,
-            value: Some(value.into()),
+            value: AttributeValue::String(value.into()),
+        }
+    }
+
+    /// Create attribute with an integer value
+    pub fn new_int(name: &'static str, value: i32) -> Self {
+        assert_valid_attribute_name(name);
+        Self {
+            name,
+            value: AttributeValue::Int(value),
         }
     }
 
     /// Create a new flag attribute (that doesn't take a value)
     pub fn new_flag(name: &'static str) -> Self {
         assert_valid_attribute_name(name);
-        Self { name, value: None }
+        Self {
+            name,
+            value: AttributeValue::None,
+        }
     }
 }
 

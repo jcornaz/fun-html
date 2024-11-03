@@ -69,6 +69,8 @@ fn should_render_html_document() {
 #[case(alt("bla"), "alt=\"bla\"")]
 #[case(width("10"), "width=\"10\"")]
 #[case(height("10"), "height=\"10\"")]
+#[case(width_int(10), "width=\"10\"")]
+#[case(height_int(10), "height=\"10\"")]
 #[case(action("something"), "action=\"something\"")]
 #[case(method_get(), "method=\"get\"")]
 #[case(method_post(), "method=\"post\"")]
@@ -82,6 +84,8 @@ fn should_render_html_document() {
 #[case(maxlength("value"), "maxlength=\"value\"")]
 #[case(multiple(), "multiple")]
 #[case(placeholder("hello"), "placeholder=\"hello\"")]
+#[case(rows(10), "rows=\"10\"")]
+#[case(cols(10), "cols=\"10\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     assert_eq!(attr.to_string(), expected);
 }
@@ -144,6 +148,8 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     select([name("foo")], [option([value("bar")], ["coucou".into()])]),
     r#"<select name="foo"><option value="bar">coucou</option></select>"#
 )]
+#[case(input([name("foo"), type_text()]), "<input name=\"foo\" type=\"text\">")]
+#[case(textarea([name("foo")], "hello world"), "<textarea name=\"foo\">hello world</textarea>")]
 #[case(button([("foo", "bar").into()], ["hello".into()]), "<button foo=\"bar\">hello</button>")]
 #[case(label([for_("foo")], ["hello".into()]), "<label for=\"foo\">hello</label>")]
 #[case(fieldset([("foo", "bar").into()], ["hello".into()]), "<fieldset foo=\"bar\">hello</fieldset>")]

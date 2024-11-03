@@ -318,6 +318,14 @@ pub fn input(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("input", attributes)
 }
 
+/// `<textarea>`
+pub fn textarea(
+    attributes: impl IntoIterator<Item = Attribute>,
+    text: impl Into<Cow<'static, str>>,
+) -> Element {
+    Element::new("textarea", attributes, [text.into().into()])
+}
+
 /// `<select>`
 pub fn select(
     attributes: impl IntoIterator<Item = Attribute>,
