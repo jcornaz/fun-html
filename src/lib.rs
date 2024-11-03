@@ -276,6 +276,26 @@ fn assert_valid_attribute_name(name: &str) {
     );
 }
 
+impl IntoIterator for Element {
+    type Item = Self;
+    type IntoIter = core::iter::Once<Self>;
+    fn into_iter(self) -> Self::IntoIter {
+        core::iter::once(self)
+    }
+}
+
+impl<const N: usize> From<[Element; N]> for Element {
+    fn from(value: [Element; N]) -> Self {
+        Vec::from(value).into()
+    }
+}
+
+impl From<Vec<Element>> for Element {
+    fn from(value: Vec<Element>) -> Self {
+        Self(ElementInner::Multiple(value))
+    }
+}
+
 /// Create an HTML [`Document`]
 ///
 /// You must pass the [`elt::head`] and [`elt::body`] element as you would with any other element.

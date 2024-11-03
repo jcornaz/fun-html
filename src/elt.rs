@@ -4,7 +4,7 @@
 //!
 //! It is also possible to inline raw HTML with [`raw`] and [`raw_unsafe`]
 
-use alloc::{borrow::Cow, string::String, vec::Vec};
+use alloc::{borrow::Cow, string::String};
 
 use crate::{Attribute, Element, ElementInner};
 
@@ -381,17 +381,5 @@ impl From<&'static str> for Element {
 impl From<String> for Element {
     fn from(value: String) -> Self {
         text(value)
-    }
-}
-
-impl<const N: usize> From<[Element; N]> for Element {
-    fn from(value: [Element; N]) -> Self {
-        Vec::from(value).into()
-    }
-}
-
-impl From<Vec<Element>> for Element {
-    fn from(value: Vec<Element>) -> Self {
-        Self(ElementInner::Multiple(value))
     }
 }

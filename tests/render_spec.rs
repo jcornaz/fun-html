@@ -89,6 +89,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[rstest]
 #[case(none(), "")]
 #[case([div([], []), div([], [])].into(), "<div></div><div></div>")]
+#[case(div([], div([], [])), "<div><div></div></div>")]
 #[case(text("hello"), "hello")]
 #[case(text("hello".to_string()), "hello")]
 #[case("hello".into(), "hello")]
