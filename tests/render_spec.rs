@@ -58,6 +58,16 @@ fn should_render_html_document() {
 #[case(action("something"), "action=\"something\"")]
 #[case(method_get(), "method=\"get\"")]
 #[case(method_post(), "method=\"post\"")]
+#[case(for_("foo"), "for=\"foo\"")]
+#[case(value("hello"), "value=\"hello\"")]
+#[case(required(), "required")]
+#[case(pattern("foobar"), "pattern=\"foobar\"")]
+#[case(min("value"), "min=\"value\"")]
+#[case(max("value"), "max=\"value\"")]
+#[case(minlength("value"), "minlength=\"value\"")]
+#[case(maxlength("value"), "maxlength=\"value\"")]
+#[case(multiple(), "multiple")]
+#[case(placeholder("hello"), "placeholder=\"hello\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     assert_eq!(attr.to_string(), expected);
 }

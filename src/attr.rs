@@ -188,3 +188,53 @@ pub fn method_get() -> Attribute {
 pub fn method_post() -> Attribute {
     Attribute::new("method", "post")
 }
+
+/// `for` attribute
+pub fn for_(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("for", value)
+}
+
+/// `value` attribute
+pub fn value(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("value", value)
+}
+
+/// `required` attribute
+pub fn required() -> Attribute {
+    Attribute::new_flag("required")
+}
+
+/// `pattern` attribute
+pub fn pattern(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("pattern", value)
+}
+
+/// `min` attribute
+pub fn min(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("min", value)
+}
+
+/// `max` attribute
+pub fn max(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("max", value)
+}
+
+/// `minlength` attribute
+pub fn minlength(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("minlength", value)
+}
+
+/// `maxlength` attribute
+pub fn maxlength(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("maxlength", value)
+}
+
+/// `multiple` attribute
+pub fn multiple() -> Attribute {
+    Attribute::new_flag("multiple")
+}
+
+/// `placeholder` attribute
+pub fn placeholder(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("placeholder", value)
+}
