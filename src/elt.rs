@@ -8,6 +8,24 @@ use alloc::{borrow::Cow, string::String, vec::Vec};
 
 use crate::{Attribute, Element, ElementInner};
 
+/// Renders nothing. Useful fo conditional rendering.
+///
+/// # Example
+///
+/// ```
+/// use fun_html::{Element, elt::{text, none}};
+///
+/// let say_hello = true;
+/// let element: Element = if say_hello {
+///   text("Hello")
+/// } else {
+///   none()
+/// };
+/// ```
+pub fn none() -> Element {
+    Element(ElementInner::None)
+}
+
 /// `<div>`
 pub fn div(
     attributes: impl IntoIterator<Item = Attribute>,

@@ -27,9 +27,16 @@
 //! Because those are simple rust functions, it is easy to leverage rust features like conditions, loops and iterators:
 //!
 //! ```
-//! # use fun_html::{elt::{li,ul}};
-//! let list = ul([], (1..=3).map(|n| li([], [n.to_string().into()])));
-//! assert_eq!(list.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>");
+//! # use fun_html::{elt::{li,ul,text}};
+//!
+//! let list_values = true;
+//! let element = if list_values {
+//!   ul([], (1..=3).map(|n| li([], [n.to_string().into()])))
+//! } else {
+//!   text("no value")
+//! };
+//!
+//! assert_eq!(element.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>")
 //! ```
 //!
 //! ## Escape hatches
@@ -103,6 +110,7 @@ enum ElementInner {
     Script(Cow<'static, str>),
     Raw(Cow<'static, str>),
     Multiple(Vec<Element>),
+    None,
 }
 
 /// An attribute
@@ -214,6 +222,7 @@ impl Display for Element {
                     write!(f, "{elt}")?;
                 }
             }
+            ElementInner::None => (),
         }
         Ok(())
     }
