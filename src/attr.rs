@@ -18,12 +18,40 @@ pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("id", id)
 }
 
+/// `class` attribute
+///
+/// It takes a list of clases and join them together
+///
+/// ## Example
+///
+/// ```
+/// # use fun_html::attr::class;
+///
+/// assert_eq!(
+///   class(["foo", "bar", "baz"]).to_string(),
+///   r#"class="foo bar baz""#,
+/// );
+/// ```
+pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {
+    let mut values = String::new();
+    let mut iter = classes.into_iter();
+    if let Some(value) = iter.next() {
+        values.push_str(value);
+    }
+    for value in iter {
+        values.push(' ');
+        values.push_str(value);
+    }
+    Attribute::new("class", values)
+}
+
 /// `lang` attribute (usually on `html` element)
 pub fn lang(lang: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("lang", lang)
 }
 
 /// Represent an anchor target
+#[derive(Debug, Clone)]
 pub enum AnchorTarget {
     /// `_blank`
     Blank,
@@ -146,29 +174,17 @@ pub fn content(content: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("content", content)
 }
 
-/// `class` attribute
-///
-/// It takes a list of clases and join them together
-///
-/// ## Example
-///
-/// ```
-/// # use fun_html::attr::class;
-///
-/// assert_eq!(
-///   class(["foo", "bar", "baz"]).to_string(),
-///   r#"class="foo bar baz""#,
-/// );
-/// ```
-pub fn class<'a>(classes: impl IntoIterator<Item = &'a str>) -> Attribute {
-    let mut values = String::new();
-    let mut iter = classes.into_iter();
-    if let Some(value) = iter.next() {
-        values.push_str(value);
-    }
-    for value in iter {
-        values.push(' ');
-        values.push_str(value);
-    }
-    Attribute::new("class", values)
+/// `action` attribute
+pub fn action(action: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("action", action)
+}
+
+/// `method_get` attribute
+pub fn method_get() -> Attribute {
+    Attribute::new("method", "get")
+}
+
+/// `method_get` attribute
+pub fn method_post() -> Attribute {
+    Attribute::new("method", "post")
 }

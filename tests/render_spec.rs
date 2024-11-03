@@ -55,9 +55,11 @@ fn should_render_html_document() {
 #[case(alt("bla"), "alt=\"bla\"")]
 #[case(width("10"), "width=\"10\"")]
 #[case(height("10"), "height=\"10\"")]
+#[case(action("something"), "action=\"something\"")]
+#[case(method_get(), "method=\"get\"")]
+#[case(method_post(), "method=\"post\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
-    let string = div([attr], []).to_string();
-    assert_eq!(string, format!("<div {expected}></div>"));
+    assert_eq!(attr.to_string(), expected);
 }
 
 #[rstest]
@@ -107,6 +109,10 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(header([("foo", "bar").into()], ["hello".into()]), "<header foo=\"bar\">hello</header>")]
 #[case(main([("foo", "bar").into()], ["hello".into()]), "<main foo=\"bar\">hello</main>")]
 #[case(footer([("foo", "bar").into()], ["hello".into()]), "<footer foo=\"bar\">hello</footer>")]
+#[case(
+    form([action("/do_something"), method_get()], [input([name("foo")])]),
+    r#"<form action="/do_something" method="get"><input name="foo"></form>"#
+)]
 fn should_render_element(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }

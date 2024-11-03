@@ -279,6 +279,19 @@ pub fn li(
     Element::new("li", attributes, children)
 }
 
+/// `<form>`
+pub fn form(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("form", attributes, children)
+}
+
+/// `<input>`
+pub fn input(attributes: impl IntoIterator<Item = Attribute>) -> Element {
+    Element::new_void("input", attributes)
+}
+
 /// HTML escaped text
 pub fn text(value: impl Into<Cow<'static, str>>) -> Element {
     ElementInner::Text(value.into()).into()
