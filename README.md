@@ -29,6 +29,11 @@ let element = if list_values {
 assert_eq!(element.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>")
 ```
 
+> [!NOTE]
+>
+> The crate [fun-htmx](https://github.com/jcornaz/fun-htmx) provide additional attributes
+> for use with [HTMX](https://htmx.org)
+
 ## Feature flags
 
 * `std`: enabled by default. must be disabled to compile to `no_std`
