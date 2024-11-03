@@ -146,6 +146,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 )]
 #[case(button([("foo", "bar").into()], ["hello".into()]), "<button foo=\"bar\">hello</button>")]
 #[case(label([for_("foo")], ["hello".into()]), "<label for=\"foo\">hello</label>")]
+#[case(fieldset([("foo", "bar").into()], ["hello".into()]), "<fieldset foo=\"bar\">hello</fieldset>")]
 fn should_render_element(#[case] def: Element, #[case] expected: &str) {
     assert_eq!(def.to_string(), expected);
 }

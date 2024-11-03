@@ -305,6 +305,14 @@ pub fn form(
     Element::new("form", attributes, children)
 }
 
+/// `<fieldset>`
+pub fn fieldset(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("fieldset", attributes, children)
+}
+
 /// `<input>`
 pub fn input(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("input", attributes)
