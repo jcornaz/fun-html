@@ -1,7 +1,11 @@
 # fun-html
 
-![License](https://img.shields.io/github/license/jcornaz/fun-html)
+[![Crates.io Version](https://img.shields.io/crates/v/fun-html)](https://crates.io/crates/fun-html)
+[![License](https://img.shields.io/github/license/jcornaz/fun-html)](./LICENSE)
 ![MSRV](https://img.shields.io/crates/msrv/fun-html)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jcornaz/fun-html/.github%2Fworkflows%2Fcheck.yml?branch=main)](https://github.com/jcornaz/fun-html/actions/workflows/check.yml?query=branch%3Amain)
+[![docs.rs](https://img.shields.io/docsrs/fun-html)](https://docs.rs/fun-html)
+
 
 This rust library provides a simple and efficient way to generate HTML using Rust functions,
 with an intuitive and composable API to create HTML elements.
