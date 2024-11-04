@@ -6,7 +6,7 @@ authors = ["Jonathan Cornaz"]
 edition = "2021"
 rust-version = "1.60"
 repository = "https://github.com/jcornaz/fun-html"
-description = "HTML as a rust function!"
+description = "HTML as a rust function"
 categories = ["template-engine"]
 keywords = ["html", "html-rendering", "web", "functional"]
 
