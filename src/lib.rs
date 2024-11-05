@@ -11,7 +11,7 @@
 //!
 //! The [`attr`] module contains functions to create common attributes.
 //!
-//! Text can be inserted by using the [`elt::text`] function or by using one of the `Into<Element>` implementations.//! ```
+//! Text can be inserted by using the [`elt::text`] function or by using one of the `Into<Element>` implementations.
 //! All text and attribute values are automatically escaped to ensure safe and valid HTML output.
 //!
 //! ```
