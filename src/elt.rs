@@ -6,7 +6,10 @@
 
 use alloc::{borrow::Cow, string::String};
 
-use crate::{Attribute, Element, ElementInner};
+use crate::{
+    attr::{content, href, name, rel},
+    Attribute, Element, ElementInner,
+};
 
 /// Renders nothing. Useful fo conditional rendering.
 ///
@@ -48,13 +51,28 @@ pub fn meta(attributes: impl IntoIterator<Item = Attribute>) -> Element {
 }
 
 /// `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+pub fn meta_charset_utf_8() -> Element {
+    raw("<meta charset=\"UTF-8\">")
+}
+
+/// `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 pub fn meta_viewport() -> Element {
     raw("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">")
+}
+
+/// `<meta name="color-scheme content="{scheme}">
+pub fn meta_color_scheme(scheme: impl Into<Cow<'static, str>>) -> Element {
+    meta([name("color-scheme"), content(scheme)])
 }
 
 /// `<link>`
 pub fn link(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("link", attributes)
+}
+
+/// `<link rel="stylesheet" href="{url}">`
+pub fn link_stylesheet(url: impl Into<Cow<'static, str>>) -> Element {
+    link([rel("stylesheet"), href(url)])
 }
 
 /// `<script>`

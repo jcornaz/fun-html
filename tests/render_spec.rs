@@ -102,13 +102,22 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case([div([], ["a".into()]), div([], ["b".into()])].into(), "<div>a</div><div>b</div>")]
 #[case(raw("<my-component></my-component>"), "<my-component></my-component>")]
 #[case(raw_unsafe("<my-component></my-component>".to_string()), "<my-component></my-component>")]
-#[case(meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
 #[case(link([("foo", "bar").into()]), "<link foo=\"bar\">")]
+#[case(
+    link_stylesheet("/styles.css"),
+    "<link rel=\"stylesheet\" href=\"/styles.css\">"
+)]
 #[case(script([("foo", "bar").into()], "alert('hello');"), "<script foo=\"bar\">alert('hello');</script>")]
 #[case(script_empty([src("/foo.js")]), "<script src=\"/foo.js\"></script>")]
+#[case(meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
+#[case(meta_charset_utf_8(), "<meta charset=\"UTF-8\">")]
 #[case(
     meta_viewport(),
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+)]
+#[case(
+    meta_color_scheme("dark"),
+    "<meta name=\"color-scheme\" content=\"dark\">"
 )]
 #[case(div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
 #[case(div([("foo", "bar".to_string()).into()], [text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]

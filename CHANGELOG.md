@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+* `meta_charset_utf_8`, `meta_color_scheme` and `link_stylesheet`
+
 
 ## [1.2.1] - 2024-11-05
 
