@@ -42,6 +42,7 @@ assert_eq!(element.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>")
 
 * `std`: enabled by default. must be disabled to compile to `no_std`
 * `rocket_v05`: implements the [`Responder` trait from rocket 0.5](https://docs.rs/rocket/0.5/rocket/response/trait.Responder.html) for `Document` and `Element`
+* `salvo_v074`: implements the [`Scribe` trait from salvo 0.74](https://docs.rs/salvo/0.74/salvo/trait.Scribe.html) for `Document` and `Element`
 
 
 ## MSRV
