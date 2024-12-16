@@ -13,6 +13,23 @@ impl<T: Into<Cow<'static, str>>> From<(&'static str, T)> for Attribute {
     }
 }
 
+/// Do not render any attribute. Useful for conditional rendering.
+///
+/// # Example
+///
+/// ```
+/// use fun_html::{attr, elt};
+///
+/// let name: Option<&str> = None;
+/// let element = elt::div([
+///   // Note, `unwrap_or_default()` would have the same effect here
+///   name.map(attr::name).unwrap_or(attr::none()),
+/// ], []);
+/// ```
+pub fn none() -> Attribute {
+    Attribute(crate::AttributeInner::None)
+}
+
 /// `id` attribute
 pub fn id(id: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("id", id)

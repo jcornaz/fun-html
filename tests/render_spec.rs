@@ -29,6 +29,7 @@ fn should_render_html_document() {
 }
 
 #[rstest]
+#[case(attr::none(), "")]
 #[case(("foo", "bar").into(), "foo=\"bar\"")]
 #[case(("x-on:keyup.enter", "doSomething").into(), "x-on:keyup.enter=\"doSomething\"")]
 #[case(("@keyup.enter", "doSomething").into(), "@keyup.enter=\"doSomething\"")]
@@ -98,6 +99,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[rstest]
 #[case(elt::none(), "")]
 #[case([elt::div([], []), elt::div([], [])].into(), "<div></div><div></div>")]
+#[case(elt::div([attr::none(), attr::none()], []), "<div></div>")]
 #[case(elt::div([], elt::div([], [])), "<div><div></div></div>")]
 #[case(elt::text("hello"), "hello")]
 #[case(elt::text("hello".to_string()), "hello")]

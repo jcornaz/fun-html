@@ -95,7 +95,7 @@ pub struct Document(Element);
 ///
 /// assert_eq!(element.to_string(), "<div></div>");
 /// ```    
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Element(ElementInner);
 
 #[derive(Debug, Clone)]
@@ -116,6 +116,12 @@ enum ElementInner {
     None,
 }
 
+impl Default for ElementInner {
+    fn default() -> Self {
+        Self::None
+    }
+}
+
 /// An attribute
 ///
 /// It can be created via [`Self::new`], [`Self::new_flag`]
@@ -132,7 +138,7 @@ enum ElementInner {
 ///   r#"id="foo""#,
 /// )
 /// ```    
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Attribute(AttributeInner);
 
 #[derive(Debug, Clone)]
@@ -140,6 +146,13 @@ enum AttributeInner {
     KeyValue(Cow<'static, str>, Cow<'static, str>),
     KeyValueInt(Cow<'static, str>, i32),
     Flag(Cow<'static, str>),
+    None,
+}
+
+impl Default for AttributeInner {
+    fn default() -> Self {
+        Self::None
+    }
 }
 
 impl Default for Document {
@@ -237,9 +250,12 @@ impl Display for Element {
 
 fn write_attributes(
     f: &mut alloc::fmt::Formatter<'_>,
-    attributes: &Vec<Attribute>,
+    attributes: &[Attribute],
 ) -> Result<(), alloc::fmt::Error> {
-    for attribute in attributes {
+    for attribute in attributes
+        .iter()
+        .filter(|a| !matches!(&a.0, AttributeInner::None))
+    {
         write!(f, " {attribute}")?;
     }
     Ok(())
@@ -260,6 +276,7 @@ impl Display for Attribute {
                 write!(f, "{key}=\"{value}\"")
             }
             AttributeInner::Flag(key) => write!(f, "{key}"),
+            AttributeInner::None => Ok(()),
         }
     }
 }
