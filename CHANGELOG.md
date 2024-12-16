@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+
+## [1.5.0] - 2024-12-16
+
 ### Deprecated
 
 * `attr::charset_utf_8()` and `elt::meta_charset_utf_8()`
@@ -90,7 +93,8 @@ Minor fix in root crate documentation
   * `std`: Enabled by default. Disable it to compile to `no_std`
   * `rocket_v05` : implement [`rocket::response::Responder`](https://docs.rs/rocket/latest/rocket/response/trait.Responder.html) for `Document` and `Element` (for rocket 0.5)
 
-[Unreleased]: https://github.com/jcornaz/fun-html/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/jcornaz/fun-html/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/jcornaz/fun-html/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/jcornaz/fun-html/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/jcornaz/fun-html/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/jcornaz/fun-html/compare/v1.2.0...v1.2.1
