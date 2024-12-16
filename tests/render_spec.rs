@@ -83,6 +83,8 @@ fn should_render_html_document() {
 #[case(attr::for_("foo"), "for=\"foo\"")]
 #[case(attr::value("hello"), "value=\"hello\"")]
 #[case(attr::required(), "required")]
+#[case(attr::disabled(), "disabled")]
+#[case(attr::autofocus(), "autofocus")]
 #[case(attr::pattern("foobar"), "pattern=\"foobar\"")]
 #[case(attr::min("value"), "min=\"value\"")]
 #[case(attr::max("value"), "max=\"value\"")]

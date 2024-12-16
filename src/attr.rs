@@ -310,6 +310,15 @@ pub fn value(value: impl Into<Cow<'static, str>>) -> Attribute {
 pub fn required() -> Attribute {
     Attribute::new_flag("required")
 }
+/// `autofocus` attribute
+pub fn autofocus() -> Attribute {
+    Attribute::new_flag("autofocus")
+}
+
+/// `disabled` attribute
+pub fn disabled() -> Attribute {
+    Attribute::new_flag("disabled")
+}
 
 /// `pattern` attribute
 pub fn pattern(value: impl Into<Cow<'static, str>>) -> Attribute {
