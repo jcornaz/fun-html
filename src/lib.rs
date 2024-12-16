@@ -133,16 +133,13 @@ enum ElementInner {
 /// )
 /// ```    
 #[derive(Debug, Clone)]
-pub struct Attribute {
-    name: Cow<'static, str>,
-    value: AttributeValue,
-}
+pub struct Attribute(AttributeInner);
 
 #[derive(Debug, Clone)]
-enum AttributeValue {
-    String(Cow<'static, str>),
-    Int(i32),
-    None,
+enum AttributeInner {
+    KeyValue(Cow<'static, str>, Cow<'static, str>),
+    KeyValueInt(Cow<'static, str>, i32),
+    Flag(Cow<'static, str>),
 }
 
 impl Default for Document {
@@ -250,21 +247,20 @@ fn write_attributes(
 
 impl Display for Attribute {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        write!(f, "{}", self.name)?;
-        match &self.value {
-            AttributeValue::String(value) => {
+        match &self.0 {
+            AttributeInner::KeyValue(key, value) => {
                 write!(
                     f,
-                    "=\"{}\"",
-                    html_escape::encode_double_quoted_attribute(value)
-                )?;
+                    "{}=\"{}\"",
+                    key,
+                    html_escape::encode_double_quoted_attribute(&value)
+                )
             }
-            AttributeValue::Int(int) => {
-                write!(f, "=\"{int}\"",)?;
+            AttributeInner::KeyValueInt(key, value) => {
+                write!(f, "{key}=\"{value}\"")
             }
-            AttributeValue::None => (),
+            AttributeInner::Flag(key) => write!(f, "{key}"),
         }
-        Ok(())
     }
 }
 
@@ -272,28 +268,19 @@ impl Attribute {
     /// Create a new attribute
     pub fn new(name: &'static str, value: impl Into<Cow<'static, str>>) -> Self {
         assert_valid_attribute_name(name);
-        Self {
-            name: name.into(),
-            value: AttributeValue::String(value.into()),
-        }
+        Self(AttributeInner::KeyValue(name.into(), value.into()))
     }
 
     /// Create attribute with an integer value
     pub fn new_int(name: &'static str, value: i32) -> Self {
         assert_valid_attribute_name(name);
-        Self {
-            name: name.into(),
-            value: AttributeValue::Int(value),
-        }
+        Self(AttributeInner::KeyValueInt(name.into(), value))
     }
 
     /// Create a new flag attribute (that doesn't take a value)
     pub fn new_flag(name: &'static str) -> Self {
         assert_valid_attribute_name(name);
-        Self {
-            name: name.into(),
-            value: AttributeValue::None,
-        }
+        Self(AttributeInner::Flag(name.into()))
     }
 
     /// Create a new attribute with a name generated at runtime
@@ -306,10 +293,7 @@ impl Attribute {
         name: impl Into<Cow<'static, str>>,
         value: impl Into<Cow<'static, str>>,
     ) -> Self {
-        Self {
-            name: name.into(),
-            value: AttributeValue::String(value.into()),
-        }
+        Self(AttributeInner::KeyValue(name.into(), value.into()))
     }
 }
 
