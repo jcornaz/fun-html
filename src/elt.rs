@@ -50,8 +50,14 @@ pub fn meta(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("meta", attributes)
 }
 
-/// `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+/// `<meta charset="UFT-8">`
+#[deprecated(since = "1.5.0", note = "renamed to 'meta_charset_utf8'")]
 pub fn meta_charset_utf_8() -> Element {
+    raw("<meta charset=\"UTF-8\">")
+}
+
+/// `<meta charset="UFT-8">`
+pub fn meta_charset_utf8() -> Element {
     raw("<meta charset=\"UTF-8\">")
 }
 

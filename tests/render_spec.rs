@@ -69,7 +69,9 @@ fn should_render_html_document() {
 #[case(attr::target(AnchorTarget::Parent), "target=\"_parent\"")]
 #[case(attr::target(AnchorTarget::Frame("myframe".into())), "target=\"myframe\"")]
 #[case(attr::charset("foobar"), "charset=\"foobar\"")]
+#[allow(deprecated)]
 #[case(attr::charset_utf_8(), "charset=\"UTF-8\"")]
+#[case(attr::charset_utf8(), "charset=\"UTF-8\"")]
 #[case(attr::name("hello"), "name=\"hello\"")]
 #[case(attr::content("bla"), "content=\"bla\"")]
 #[case(attr::alt("bla"), "alt=\"bla\"")]
@@ -121,7 +123,9 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(elt::script([("foo", "bar").into()], "alert('hello');"), "<script foo=\"bar\">alert('hello');</script>")]
 #[case(elt::script_empty([attr::src("/foo.js")]), "<script src=\"/foo.js\"></script>")]
 #[case(elt::meta([("foo", "bar").into()]), "<meta foo=\"bar\">")]
+#[allow(deprecated)]
 #[case(elt::meta_charset_utf_8(), "<meta charset=\"UTF-8\">")]
+#[case(elt::meta_charset_utf8(), "<meta charset=\"UTF-8\">")]
 #[case(
     elt::meta_viewport(),
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"

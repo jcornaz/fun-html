@@ -267,7 +267,13 @@ pub fn charset(charset: impl Into<Cow<'static, str>>) -> Attribute {
 }
 
 /// Alias for `charset("UTF-8")`
+#[deprecated(since = "1.5.0", note = "renamed to 'meta_charset_utf8'")]
 pub fn charset_utf_8() -> Attribute {
+    charset("UTF-8")
+}
+
+/// Alias for `charset("UTF-8")`
+pub fn charset_utf8() -> Attribute {
     charset("UTF-8")
 }
 
