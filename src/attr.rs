@@ -321,6 +321,21 @@ pub fn autofocus() -> Attribute {
     Attribute::new_flag("autofocus")
 }
 
+/// `autocomplete` attribute
+pub fn autocomplete(type_: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("autocomplete", type_)
+}
+
+/// `autocomplete="on"` attribute
+pub fn autocomplete_on() -> Attribute {
+    Attribute::new("autocomplete", "on")
+}
+
+/// `autocomplete="on"` attribute
+pub fn autocomplete_off() -> Attribute {
+    Attribute::new("autocomplete", "off")
+}
+
 /// `disabled` attribute
 pub fn disabled() -> Attribute {
     Attribute::new_flag("disabled")
