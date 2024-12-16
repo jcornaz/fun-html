@@ -14,8 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-* `attr::none()` for conditional rendering of an attribute
 * implement `Default` for `Element` and `Attribute`
+* `attr::none()` for conditional rendering of an attribute
 * `attr::disabled()` and `attr::autofocus()`
 * `attr::charset_utf8()` and `elt::meta_charset_utf8()`
 * `attr::autocomplete(type_: impl Into<Cow<'static, str>>)`, `attr::autocomplete_on()`, `attr::autocomplete_off()`
