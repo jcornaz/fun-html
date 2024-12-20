@@ -23,7 +23,7 @@ salvo_v074 = ["std", "dep:salvo_v074"]
 [dependencies]
 # Public
 rocket_v05 = { package = "rocket", version = "0.5", default-features = false, optional = true }
-salvo_v074 = { package = "salvo", version = "0.74", default-features = false, optional = true }
+salvo_v074 = { package = "salvo_core", version = "0.74", default-features = false, optional = true }
 
 # Private
 html-escape = { version = "0.2", default-features = false }
