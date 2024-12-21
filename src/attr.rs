@@ -141,6 +141,11 @@ pub fn height_int(value: i32) -> Attribute {
     Attribute::new_int("height", value)
 }
 
+/// `style` attribute
+pub fn style(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("style", value)
+}
+
 /// `cols` attribute
 pub fn cols(value: i32) -> Attribute {
     Attribute::new_int("cols", value)
