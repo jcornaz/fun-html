@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-* `attr::style`
+* `attr::style` attribute
+* `attr::minlength_u16` and `attr::maxlength_u16` attributes
 
 
 ## [1.5.0] - 2024-12-16

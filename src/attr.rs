@@ -366,9 +366,19 @@ pub fn minlength(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("minlength", value)
 }
 
+/// `minlength` attribute using a `u16` value
+pub fn minlength_u16(value: u16) -> Attribute {
+    Attribute::new_int("minlength", value.into())
+}
+
 /// `maxlength` attribute
 pub fn maxlength(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("maxlength", value)
+}
+
+/// `maxlength` attribute using a `u16` value
+pub fn maxlength_u16(value: u16) -> Attribute {
+    Attribute::new_int("maxlength", value.into())
 }
 
 /// `multiple` attribute

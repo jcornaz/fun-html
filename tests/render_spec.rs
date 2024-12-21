@@ -95,6 +95,8 @@ fn should_render_html_document() {
 #[case(attr::max("value"), "max=\"value\"")]
 #[case(attr::minlength("value"), "minlength=\"value\"")]
 #[case(attr::maxlength("value"), "maxlength=\"value\"")]
+#[case(attr::minlength_u16(42), "minlength=\"42\"")]
+#[case(attr::maxlength_u16(42), "maxlength=\"42\"")]
 #[case(attr::multiple(), "multiple")]
 #[case(attr::placeholder("hello"), "placeholder=\"hello\"")]
 #[case(attr::rows(10), "rows=\"10\"")]
