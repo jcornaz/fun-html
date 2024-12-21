@@ -15,10 +15,10 @@
 //! All text and attribute values are automatically escaped to ensure safe and valid HTML output.
 //!
 //! ```
-//! use fun_html::{attr::class, elt::h1};
+//! use fun_html::{attr, elt};
 //!
-//! let greeting = h1(
-//!   [class(["bold"])], // <-- attributes
+//! let greeting = elt::h1(
+//!   [attr::class(["bold"])], // <-- attributes
 //!   ["Hello world!".into()], // <-- children
 //! );
 //! assert_eq!(greeting.to_string(), r#"<h1 class="bold">Hello world!</h1>"#);
@@ -27,16 +27,20 @@
 //! Because those are simple rust functions, it is easy to leverage rust features like conditions, loops and iterators:
 //!
 //! ```
-//! # use fun_html::{elt::{li,ul,text}};
+//! use fun_html::{elt, Element};
 //!
-//! let list_values = true;
-//! let element = if list_values {
-//!   ul([], (1..=3).map(|n| li([], [n.to_string().into()])))
-//! } else {
-//!   text("no value")
+//! fn list_view(items: Vec<i32>) -> Element {
+//!   if !items.is_empty(){
+//!     elt::ul([], items.into_iter().map(|item| elt::li([], [item.to_string().into()])))
+//!   } else {
+//!     elt::text("no item")
+//!   }
 //! };
 //!
-//! assert_eq!(element.to_string(), "<ul><li>1</li><li>2</li><li>3</li></ul>")
+//! assert_eq!(
+//!   list_view((1..=3).collect()).to_string(),
+//!   "<ul><li>1</li><li>2</li><li>3</li></ul>"
+//! );
 //! ```
 //!
 //! ## Escape hatches

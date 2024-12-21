@@ -22,6 +22,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 * `attr::maxlength_u16`
 
 
+### Documentation
+
+* Root crate example slightly improved
+
+
 ## [1.5.0] - 2024-12-16
 
 ### Deprecated
