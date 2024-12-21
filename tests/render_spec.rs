@@ -102,6 +102,7 @@ fn should_render_html_document() {
 #[case(attr::rows(10), "rows=\"10\"")]
 #[case(attr::cols(10), "cols=\"10\"")]
 #[case(attr::style("width: 5px"), "style=\"width: 5px\"")]
+#[case(attr::role_str("menu"), "role=\"menu\"")]
 fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
     assert_eq!(attr.to_string(), expected);
 }

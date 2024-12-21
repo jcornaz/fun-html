@@ -390,3 +390,8 @@ pub fn multiple() -> Attribute {
 pub fn placeholder(value: impl Into<Cow<'static, str>>) -> Attribute {
     Attribute::new("placeholder", value)
 }
+
+/// `role` attribute with an aribtrary string value
+pub fn role_str(value: impl Into<Cow<'static, str>>) -> Attribute {
+    Attribute::new("role", value)
+}
