@@ -111,6 +111,14 @@ pub fn body(
     Element::new("body", attributes, children)
 }
 
+/// `<hgroup>`
+pub fn hgroup(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("hgroup", attributes, children)
+}
+
 /// `<h1>`
 pub fn h1(
     attributes: impl IntoIterator<Item = Attribute>,

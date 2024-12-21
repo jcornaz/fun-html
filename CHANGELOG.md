@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 * `attr::style` attribute
 * `attr::minlength_u16` and `attr::maxlength_u16` attributes
+* `elt::hgroup` element
 
 
 ## [1.5.0] - 2024-12-16
