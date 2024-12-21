@@ -7,11 +7,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added
 
-* `attr::style` attribute
-* `attr::minlength_u16` and `attr::maxlength_u16` attributes
-* `elt::hgroup` element
+### Added elements
+
+* `elt::hgroup`
+* `elt::hr`
+
+
+### Added attributes
+
+* `attr::style`
+* `attr::minlength_u16`
+* `attr::maxlength_u16`
 
 
 ## [1.5.0] - 2024-12-16

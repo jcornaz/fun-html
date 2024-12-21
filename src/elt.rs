@@ -180,6 +180,11 @@ pub fn br(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("br", attributes)
 }
 
+/// `<hr>`
+pub fn hr(attributes: impl IntoIterator<Item = Attribute>) -> Element {
+    Element::new_void("hr", attributes)
+}
+
 /// `<small>`
 pub fn small(
     attributes: impl IntoIterator<Item = Attribute>,
