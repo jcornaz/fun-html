@@ -45,6 +45,14 @@ pub fn head(
     Element::new("head", attributes, children)
 }
 
+/// `<legend>`
+pub fn legend(
+    attributes: impl IntoIterator<Item = Attribute>,
+    children: impl IntoIterator<Item = Element>,
+) -> Element {
+    Element::new("legend", attributes, children)
+}
+
 /// `<meta>`
 pub fn meta(attributes: impl IntoIterator<Item = Attribute>) -> Element {
     Element::new_void("meta", attributes)

@@ -143,6 +143,7 @@ fn should_render_attribute(#[case] attr: Attribute, #[case] expected: &str) {
 #[case(elt::div([("foo", "bar").into()], ["hello".into()]), "<div foo=\"bar\">hello</div>")]
 #[case(elt::div([("foo", "bar".to_string()).into()], [elt::text("hello".to_string())]), "<div foo=\"bar\">hello</div>")]
 #[case(elt::head([attr::id("foo")], [elt::text("hello")]), "<head id=\"foo\">hello</head>")]
+#[case(elt::legend([attr::id("foo")], [elt::text("hello")]), "<legend id=\"foo\">hello</legend>")]
 #[case(elt::title([("foo", "bar").into()], "hello"), "<title foo=\"bar\">hello</title>")]
 #[case(elt::body([attr::id("foo")], [elt::text("hello")]), "<body id=\"foo\">hello</body>")]
 #[case(elt::hgroup([attr::id("foo")], [elt::text("hello")]), "<hgroup id=\"foo\">hello</hgroup>")]
