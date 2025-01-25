@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+* `maud_v026` feature flag providing implementation of `maud::Render` for `Document` and `Element`,
+  as well as conversion from/to maud's `Markup` type.
+
 
 ## [1.6.0] - 2024-12-21
 

@@ -59,11 +59,14 @@
 //! * `std`: enabled by default. must be disabled to compile to `no_std`
 //! * `rocket_v05`: implements the [`Responder` trait from rocket 0.5](https://docs.rs/rocket/0.5/rocket/response/trait.Responder.html) for [`Document`] and [`Element`]
 //! * `salvo_v074`: implements the [`Scribe` trait from salvo 0.74](https://docs.rs/salvo/0.74/salvo/trait.Scribe.html) for [`Document`] and [`Element`]
+//! * `maud_v026`: implements `Render` add provide conversion from/to `Markup` for [maud 0.26](https://docs.rs/maud/0.26)
 
 pub mod attr;
 pub mod elt;
 
 mod interop {
+    #[cfg(feature = "maud_v026")]
+    mod maud_v026;
     #[cfg(feature = "rocket_v05")]
     mod rocket_v05;
     #[cfg(feature = "salvo_v074")]

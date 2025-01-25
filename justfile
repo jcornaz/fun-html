@@ -11,7 +11,7 @@ watch:
 
 # Run the tests
 test:
-	cargo hack test --tests --feature-powerset --locked
+	cargo hack test --tests --each-feature --locked
 	cargo test --examples --all-features --locked
 	cargo test --doc --all-features --locked
 

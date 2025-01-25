@@ -19,11 +19,13 @@ default = ["std"]
 std = ["html-escape/std"]
 rocket_v05 = ["std", "dep:rocket_v05"]
 salvo_v074 = ["std", "dep:salvo_v074"]
+maud_v026 = ["std", "dep:maud_v026"]
 
 [dependencies]
 # Public
 rocket_v05 = { package = "rocket", version = "0.5", default-features = false, optional = true }
 salvo_v074 = { package = "salvo_core", version = "0.74", default-features = false, optional = true }
+maud_v026 = { package = "maud", version = "0.26", default-features = false, optional = true }
 
 # Private
 html-escape = { version = "0.2", default-features = false }
