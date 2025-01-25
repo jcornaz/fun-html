@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+
+## [1.7.0] - 2025-01-25
+
 ### Added
 
 * `maud_v026` feature flag providing implementation of `maud::Render` for `Document` and `Element`,
@@ -121,7 +124,8 @@ Minor fix in root crate documentation
   * `std`: Enabled by default. Disable it to compile to `no_std`
   * `rocket_v05` : implement [`rocket::response::Responder`](https://docs.rs/rocket/latest/rocket/response/trait.Responder.html) for `Document` and `Element` (for rocket 0.5)
 
-[Unreleased]: https://github.com/jcornaz/fun-html/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/jcornaz/fun-html/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/jcornaz/fun-html/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/jcornaz/fun-html/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/jcornaz/fun-html/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/jcornaz/fun-html/compare/v1.3.0...v1.4.0

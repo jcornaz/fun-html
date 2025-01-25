@@ -343,7 +343,7 @@ dependencies = [
 
 [[package]]
 name = "fun-html"
-version = "1.6.0"
+version = "1.7.0"
 dependencies = [
  "html-escape",
  "maud",
