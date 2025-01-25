@@ -349,7 +349,8 @@ dependencies = [
  "maud",
  "rocket",
  "rstest",
- "salvo_core",
+ "salvo_core 0.74.0",
+ "salvo_core 0.76.1",
 ]
 
 [[package]]
@@ -1352,6 +1353,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "salvo-serde-util"
+version = "0.76.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eaa72be3f931048f35994f9a53f4e7d8717ec7a786aa6a72e7a769e79f81b2bb"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "salvo_core"
 version = "0.74.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1380,13 +1392,54 @@ dependencies = [
  "pin-project",
  "rand",
  "regex",
- "salvo_macros",
+ "salvo_macros 0.74.3",
  "serde",
  "serde-xml-rs",
  "serde_json",
  "sync_wrapper",
  "tempfile",
- "thiserror",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-util",
+ "tracing",
+]
+
+[[package]]
+name = "salvo_core"
+version = "0.76.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ed60d841c684d29401e11e85e770026b98e9ebe65538893db77ff30523d8c3a6"
+dependencies = [
+ "async-trait",
+ "base64 0.22.1",
+ "bytes",
+ "enumflags2",
+ "form_urlencoded",
+ "futures-channel",
+ "futures-util",
+ "headers",
+ "http 1.2.0",
+ "http-body-util",
+ "hyper 1.5.2",
+ "hyper-util",
+ "indexmap",
+ "mime",
+ "mime-infer",
+ "multer 3.1.0",
+ "multimap",
+ "nix",
+ "parking_lot",
+ "percent-encoding",
+ "pin-project",
+ "rand",
+ "regex",
+ "salvo_macros 0.76.1",
+ "serde",
+ "serde-xml-rs",
+ "serde_json",
+ "sync_wrapper",
+ "tempfile",
+ "thiserror 2.0.11",
  "tokio",
  "tokio-util",
  "tracing",
@@ -1402,7 +1455,21 @@ dependencies = [
  "proc-macro2",
  "quote",
  "regex",
- "salvo-serde-util",
+ "salvo-serde-util 0.74.3",
+ "syn",
+]
+
+[[package]]
+name = "salvo_macros"
+version = "0.76.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "63dac3be5cb59d9263fd396c28efa2cb0aa7b86cc6e179bfa7092f59c53124d8"
+dependencies = [
+ "proc-macro-crate",
+ "proc-macro2",
+ "quote",
+ "regex",
+ "salvo-serde-util 0.76.1",
  "syn",
 ]
 
@@ -1441,7 +1508,7 @@ checksum = "fb3aa78ecda1ebc9ec9847d5d3aba7d618823446a049ba2491940506da6e2782"
 dependencies = [
  "log",
  "serde",
- "thiserror",
+ "thiserror 1.0.69",
  "xml-rs",
 ]
 
@@ -1597,7 +1664,16 @@ version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b6aaf5339b578ea85b50e080feb250a3e8ae8cfcdff9a461c9ec2904bc923f52"
 dependencies = [
- "thiserror-impl",
+ "thiserror-impl 1.0.69",
+]
+
+[[package]]
+name = "thiserror"
+version = "2.0.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d452f284b73e6d76dd36758a0c8684b1d5be31f92b89d07fd5822175732206fc"
+dependencies = [
+ "thiserror-impl 2.0.11",
 ]
 
 [[package]]
@@ -1605,6 +1681,17 @@ name = "thiserror-impl"
 version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4fee6c4efc90059e10f81e6d42c60a18f76588c3d74cb83a0b242a2b6c7504c1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "2.0.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "26afc1baea8a989337eeb52b6e72a039780ce45c3edfcc9c5b9d112feeb173c2"
 dependencies = [
  "proc-macro2",
  "quote",
