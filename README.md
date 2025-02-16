@@ -5,7 +5,7 @@
 ![MSRV](https://img.shields.io/crates/msrv/fun-html)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/jcornaz/fun-html/.github%2Fworkflows%2Fcheck.yml?branch=main)](https://github.com/jcornaz/fun-html/actions/workflows/check.yml?query=branch%3Amain)
 [![docs.rs](https://img.shields.io/docsrs/fun-html)](https://docs.rs/fun-html)
-
+![Maintenance](https://img.shields.io/maintenance/passively/2025)
 
 This rust library provides a simple and efficient way to generate HTML using Rust functions,
 with an intuitive and composable API to create HTML elements.
