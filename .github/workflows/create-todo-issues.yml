@@ -19,7 +19,7 @@ jobs:
       issues: write
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: alstr/todo-to-issue-action@master
         env:
           MANUAL_COMMIT_REF: ${{ inputs.COMMIT_REF }}
